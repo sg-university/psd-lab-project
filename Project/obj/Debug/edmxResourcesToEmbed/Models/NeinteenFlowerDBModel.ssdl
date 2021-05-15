@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeinteenFlowerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MsEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EmployeeName" Type="varchar(max)" />
+    <Property Name="EmployeeDOB" Type="date" />
+    <Property Name="EmployeeGender" Type="varchar(max)" />
+    <Property Name="EmployeeAddress" Type="varchar(max)" />
+    <Property Name="EmployeePhone" Type="varchar(max)" />
+    <Property Name="EmployeeEmail" Type="varchar(max)" />
+    <Property Name="EmployeeSalary" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="EmployeePassword" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="MsFlower">
+    <Key>
+      <PropertyRef Name="FlowerID" />
+    </Key>
+    <Property Name="FlowerID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FlowerName" Type="varchar(max)" />
+    <Property Name="FlowerTypeID" Type="uniqueidentifier" />
+    <Property Name="FlowerDescription" Type="varchar(max)" />
+    <Property Name="FlowerPrice" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="FlowerImage" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="MsFlowerType">
+    <Key>
+      <PropertyRef Name="FlowerTypeID" />
+    </Key>
+    <Property Name="FlowerTypeID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FlowerTypeName" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="MsMember">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberName" Type="varchar(max)" />
+    <Property Name="MemberDOB" Type="datetime" />
+    <Property Name="MemberGender" Type="varchar(max)" />
+    <Property Name="MemberAddress" Type="varchar(max)" />
+    <Property Name="MemberPhone" Type="varchar(max)" />
+    <Property Name="MemberEmail" Type="varchar(max)" />
+    <Property Name="MemberPassword" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TrDetail">
+    <Key>
+      <PropertyRef Name="DetailID" />
+    </Key>
+    <Property Name="DetailID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TransactionID" Type="uniqueidentifier" />
+    <Property Name="FlowerID" Type="uniqueidentifier" />
+    <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="TrHeader">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberID" Type="uniqueidentifier" />
+    <Property Name="EmployeeID" Type="uniqueidentifier" />
+    <Property Name="TransactionDate" Type="datetime" />
+    <Property Name="DiscountPercentage" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <Association Name="FK_MsFlower_MsFlowerType_FlowerTypeID">
+    <End Role="MsFlowerType" Type="Self.MsFlowerType" Multiplicity="0..1" />
+    <End Role="MsFlower" Type="Self.MsFlower" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsFlowerType">
+        <PropertyRef Name="FlowerTypeID" />
+      </Principal>
+      <Dependent Role="MsFlower">
+        <PropertyRef Name="FlowerTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrDetail_MsFlower_FlowerID">
+    <End Role="MsFlower" Type="Self.MsFlower" Multiplicity="0..1" />
+    <End Role="TrDetail" Type="Self.TrDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsFlower">
+        <PropertyRef Name="FlowerID" />
+      </Principal>
+      <Dependent Role="TrDetail">
+        <PropertyRef Name="FlowerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrDetail_TrHeader_TransactionID">
+    <End Role="TrHeader" Type="Self.TrHeader" Multiplicity="0..1" />
+    <End Role="TrDetail" Type="Self.TrDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrHeader">
+        <PropertyRef Name="TransactionID" />
+      </Principal>
+      <Dependent Role="TrDetail">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrHeader_MsEmployee_EmployeeID">
+    <End Role="MsEmployee" Type="Self.MsEmployee" Multiplicity="0..1" />
+    <End Role="TrHeader" Type="Self.TrHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsEmployee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="TrHeader">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrHeader_MsMember_MemberID">
+    <End Role="MsMember" Type="Self.MsMember" Multiplicity="0..1" />
+    <End Role="TrHeader" Type="Self.TrHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MsMember">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="TrHeader">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NeinteenFlowerDBModelStoreContainer">
+    <EntitySet Name="MsEmployee" EntityType="Self.MsEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MsFlower" EntityType="Self.MsFlower" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MsFlowerType" EntityType="Self.MsFlowerType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MsMember" EntityType="Self.MsMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrDetail" EntityType="Self.TrDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrHeader" EntityType="Self.TrHeader" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MsFlower_MsFlowerType_FlowerTypeID" Association="Self.FK_MsFlower_MsFlowerType_FlowerTypeID">
+      <End Role="MsFlowerType" EntitySet="MsFlowerType" />
+      <End Role="MsFlower" EntitySet="MsFlower" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrDetail_MsFlower_FlowerID" Association="Self.FK_TrDetail_MsFlower_FlowerID">
+      <End Role="MsFlower" EntitySet="MsFlower" />
+      <End Role="TrDetail" EntitySet="TrDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrDetail_TrHeader_TransactionID" Association="Self.FK_TrDetail_TrHeader_TransactionID">
+      <End Role="TrHeader" EntitySet="TrHeader" />
+      <End Role="TrDetail" EntitySet="TrDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrHeader_MsEmployee_EmployeeID" Association="Self.FK_TrHeader_MsEmployee_EmployeeID">
+      <End Role="MsEmployee" EntitySet="MsEmployee" />
+      <End Role="TrHeader" EntitySet="TrHeader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrHeader_MsMember_MemberID" Association="Self.FK_TrHeader_MsMember_MemberID">
+      <End Role="MsMember" EntitySet="MsMember" />
+      <End Role="TrHeader" EntitySet="TrHeader" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
