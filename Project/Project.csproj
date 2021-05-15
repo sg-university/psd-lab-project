@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Factory\MsEmployeeFactory.cs" />
+    <Compile Include="Factories\MsEmployeeFactory.cs" />
     <Compile Include="Models\AuthCredentials.cs" />
     <Compile Include="Models\MsEmployee.cs">
       <DependentUpon>NeinteenFlowerDBModel.tt</DependentUpon>
