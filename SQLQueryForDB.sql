@@ -1,9 +1,9 @@
-﻿DROP TABLE IF EXISTS MsEmployee;
+﻿DROP TABLE IF EXISTS TrDetail;
+DROP TABLE IF EXISTS TrHeader;
+DROP TABLE IF EXISTS MsFlowerType;
+DROP TABLE IF EXISTS MsEmployee;
 DROP TABLE IF EXISTS MsMember;
 DROP TABLE IF EXISTS MsFlower;
-DROP TABLE IF EXISTS MsFlowerType;
-DROP TABLE IF EXISTS TrTransaction;
-DROP TABLE IF EXISTS TrDetail;
 CREATE TABLE MsEmployee
 (EmployeeID       UNIQUEIDENTIFIER, 
  EmployeeName     VARCHAR(MAX), 
@@ -48,12 +48,16 @@ CREATE TABLE TrHeader
  EmployeeID         UNIQUEIDENTIFIER, 
  TransactionDate    DATETIME, 
  DiscountPercentage NUMERIC, 
+ CONSTRAINT PK_TrHeader_TransactionID PRIMARY KEY(TransactionID), 
  CONSTRAINT FK_TrHeader_MsMember_MemberID FOREIGN KEY(MemberID) REFERENCES MsMember(MemberID), 
  CONSTRAINT FK_TrHeader_MsEmployee_EmployeeID FOREIGN KEY(EmployeeID) REFERENCES MsEmployee(EmployeeID)
 );
 CREATE TABLE TrDetail
-(TransactionID UNIQUEIDENTIFIER, 
+(DetailID      UNIQUEIDENTIFIER, 
+ TransactionID UNIQUEIDENTIFIER, 
  FlowerID      UNIQUEIDENTIFIER, 
  Quantity      NUMERIC, 
+ CONSTRAINT PK_TrHeader_DetailID PRIMARY KEY(DetailID), 
+ CONSTRAINT FK_TrDetail_TrHeader_TransactionID FOREIGN KEY(TransactionID) REFERENCES TrHeader(TransactionID), 
  CONSTRAINT FK_TrDetail_MsFlower_FlowerID FOREIGN KEY(FlowerID) REFERENCES MsFlower(FlowerID),
 );
