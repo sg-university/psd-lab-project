@@ -89,6 +89,7 @@
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
       <LastGenOutput>NeinteenFlowerDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\InsertFlowerPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,13 @@
     </Compile>
     <Compile Include="Views\Navigation.Master.designer.cs">
       <DependentUpon>Navigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertFlowerPage.aspx.cs">
+      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InsertFlowerPage.aspx.designer.cs">
+      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
