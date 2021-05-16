@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Project.Views
 {
-    public partial class LoginPage : System.Web.UI.Page
+    public partial class InsertFlowerPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // test
+
         }
     }
 }

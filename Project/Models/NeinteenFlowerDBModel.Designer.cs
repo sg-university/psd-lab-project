@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Data\University\Semester 4\Pattern Software Design\LAB\Project\Project\Project\Models\NeinteenFlowerDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Data\University\Semester 4\Pattern Software Design\LAB\Project\psd-lab-project\Project\Models\NeinteenFlowerDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
