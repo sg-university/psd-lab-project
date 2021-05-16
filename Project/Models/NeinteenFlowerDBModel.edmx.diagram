@@ -13,10 +13,10 @@
         <AssociationConnector Association="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" ManuallyRouted="false" />
         <AssociationConnector Association="NeinteenFlowerDBModel.FK_MsFlower_MsFlowerType_FlowerTypeID" ManuallyRouted="false" />
         <AssociationConnector Association="NeinteenFlowerDBModel.FK_TrHeader_MsMember_MemberID" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NeinteenFlowerDBModel.TrDetail" Width="1.5" PointX="6.25" PointY="1.75" />
+        <EntityTypeShape EntityType="NeinteenFlowerDBModel.TrDetail" Width="1.5" PointX="6.125" PointY="2.125" />
         <AssociationConnector Association="NeinteenFlowerDBModel.FK_TrDetail_MsFlower_FlowerID" />
         <AssociationConnector Association="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

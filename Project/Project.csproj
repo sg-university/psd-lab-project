@@ -89,12 +89,19 @@
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
       <LastGenOutput>NeinteenFlowerDBModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\InsertFlower.aspx" />
+    <Content Include="Views\ForgotPasswordPage.aspx" />
+    <Content Include="Views\InsertFlowerPage.aspx" />
+    <Content Include="Views\LoginPage.aspx" />
+    <Content Include="Views\RegisterPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Factories\FlowerFactory.cs" />
+    <Compile Include="Factories\TrDetailFactory.cs" />
+    <Compile Include="Factories\TrHeaderFactory.cs" />
+    <Compile Include="Factories\MsFlowerTypeFactory.cs" />
+    <Compile Include="Factories\MsFlowerFactory.cs" />
+    <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
     <Compile Include="Models\AuthCredentials.cs" />
     <Compile Include="Models\MsEmployee.cs">
@@ -131,20 +138,53 @@
       <DependentUpon>NeinteenFlowerDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Views\InsertFlower.aspx.cs">
-      <DependentUpon>InsertFlower.aspx</DependentUpon>
+    <Compile Include="Repositories\TrDetailRepository.cs" />
+    <Compile Include="Repositories\TrHeaderRepository.cs" />
+    <Compile Include="Repositories\MsFlowerTypeRepository.cs" />
+    <Compile Include="Repositories\MsFlowerRepository.cs" />
+    <Compile Include="Repositories\MsMemberRepository.cs" />
+    <Compile Include="Repositories\MsEmployeeRepository.cs" />
+    <Compile Include="Views\ForgotPasswordPage.aspx.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\InsertFlower.aspx.designer.cs">
-      <DependentUpon>InsertFlower.aspx</DependentUpon>
+    <Compile Include="Views\ForgotPasswordPage.aspx.designer.cs">
+      <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Navigation.Master.cs">
-      <DependentUpon>Navigation.Master</DependentUpon>
+    <Compile Include="Views\GuestNavigation.Master.cs">
+      <DependentUpon>GuestNavigation.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Navigation.Master.designer.cs">
-      <DependentUpon>Navigation.Master</DependentUpon>
+    <Compile Include="Views\GuestNavigation.Master.designer.cs">
+      <DependentUpon>GuestNavigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertFlowerPage.aspx.cs">
+      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InsertFlowerPage.aspx.designer.cs">
+      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.aspx.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\LoginPage.aspx.designer.cs">
+      <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisteredNavigation.Master.cs">
+      <DependentUpon>RegisteredNavigation.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RegisteredNavigation.Master.designer.cs">
+      <DependentUpon>RegisteredNavigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterPage.aspx.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\RegisterPage.aspx.designer.cs">
+      <DependentUpon>RegisterPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +196,8 @@
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Views\Navigation.Master" />
+    <Content Include="Views\RegisteredNavigation.Master" />
+    <Content Include="Views\GuestNavigation.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
