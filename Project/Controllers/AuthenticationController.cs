@@ -9,7 +9,7 @@ namespace Project.Controllers
 {
     public class AuthenticationController
     {
-        public UserRepository userRepository = new UserRepository();
+        public MsEmployeeRepository userRepository = new MsEmployeeRepository();
 
         public Object Login(AuthCredentials authCredentials)
         {
