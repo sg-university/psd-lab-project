@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MemberNavigation.master.cs" Inherits="Project.Views.MemberNavigation" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <a href="/Views/PreOrderPage.aspx">Pre Order</a>
+            <a href="/Views/TransactionHistoryPage.aspx">Transaction History</a>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

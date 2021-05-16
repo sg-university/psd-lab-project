@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/RegisteredNavigation.Master" AutoEventWireup="true" CodeBehind="InsertFlowerPage.aspx.cs" Inherits="Project.Views.InsertFlowerPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/EmployeeNavigation.Master" AutoEventWireup="true" CodeBehind="InsertFlowerPage.aspx.cs" Inherits="Project.Views.InsertFlowerPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

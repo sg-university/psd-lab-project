@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Project.Views
 {
-    public partial class RegisteredNavigation : System.Web.UI.MasterPage
+    public partial class AdministratorNavigation : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
