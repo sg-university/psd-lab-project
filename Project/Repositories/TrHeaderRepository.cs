@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<TrHeader> result = db.TrHeaders.ToList();
             return result;
         }
-        public TrHeader ReadOneByID(int ID)
+        public TrHeader ReadOneByID(Guid ID)
         {
             TrHeader result = this.ReadAll().Where(x => x.TransactionID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,7 +27,7 @@ namespace Project.Repositories
             TrHeader currentTrHeader = this.ReadAll().LastOrDefault();
             return currentTrHeader;
         }
-        public TrHeader UpdateOneByID(int ID, TrHeader toUpdateTrHeader)
+        public TrHeader UpdateOneByID(Guid ID, TrHeader toUpdateTrHeader)
         {
             TrHeader currentTrHeader = this.ReadOneByID(ID);
             currentTrHeader.MemberID = toUpdateTrHeader.MemberID;
@@ -37,7 +37,7 @@ namespace Project.Repositories
             db.SaveChanges();
             return currentTrHeader;
         }
-        public TrHeader DeleteOneByID(int ID)
+        public TrHeader DeleteOneByID(Guid ID)
         {
             TrHeader currentTrHeader = this.ReadOneByID(ID);
             db.TrHeaders.Remove(currentTrHeader);

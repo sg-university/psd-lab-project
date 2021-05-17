@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<MsFlowerType> result = db.MsFlowerTypes.ToList();
             return result;
         }
-        public MsFlowerType ReadOneByID(int ID)
+        public MsFlowerType ReadOneByID(Guid ID)
         {
             MsFlowerType result = this.ReadAll().Where(x => x.FlowerTypeID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,14 +27,14 @@ namespace Project.Repositories
             MsFlowerType currentMsFlowerType = this.ReadAll().LastOrDefault();
             return currentMsFlowerType;
         }
-        public MsFlowerType UpdateOneByID(int ID, MsFlowerType toUpdateMsFlowerType)
+        public MsFlowerType UpdateOneByID(Guid ID, MsFlowerType toUpdateMsFlowerType)
         {
             MsFlowerType currentMsFlowerType = this.ReadOneByID(ID);
             currentMsFlowerType.FlowerTypeName = toUpdateMsFlowerType.FlowerTypeName;
             db.SaveChanges();
             return currentMsFlowerType;
         }
-        public MsFlowerType DeleteOneByID(int ID)
+        public MsFlowerType DeleteOneByID(Guid ID)
         {
             MsFlowerType currentMsFlowerType = this.ReadOneByID(ID);
             db.MsFlowerTypes.Remove(currentMsFlowerType);

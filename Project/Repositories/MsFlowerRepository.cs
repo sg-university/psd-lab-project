@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<MsFlower> result = db.MsFlowers.ToList();
             return result;
         }
-        public MsFlower ReadOneByID(int ID)
+        public MsFlower ReadOneByID(Guid ID)
         {
             MsFlower result = this.ReadAll().Where(x => x.FlowerID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,7 +27,7 @@ namespace Project.Repositories
             MsFlower currentMsFlower = this.ReadAll().LastOrDefault();
             return currentMsFlower;
         }
-        public MsFlower UpdateOneByID(int ID, MsFlower toUpdateMsFlower)
+        public MsFlower UpdateOneByID(Guid ID, MsFlower toUpdateMsFlower)
         {
             MsFlower currentMsFlower = this.ReadOneByID(ID);
             currentMsFlower.FlowerName = toUpdateMsFlower.FlowerName;
@@ -38,7 +38,7 @@ namespace Project.Repositories
             db.SaveChanges();
             return currentMsFlower;
         }
-        public MsFlower DeleteOneByID(int ID)
+        public MsFlower DeleteOneByID(Guid ID)
         {
             MsFlower currentMsFlower = this.ReadOneByID(ID);
             db.MsFlowers.Remove(currentMsFlower);
