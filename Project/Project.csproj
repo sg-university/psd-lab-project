@@ -97,12 +97,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\Validation.cs" />
     <Compile Include="Factories\TrDetailFactory.cs" />
     <Compile Include="Factories\TrHeaderFactory.cs" />
     <Compile Include="Factories\MsFlowerTypeFactory.cs" />
     <Compile Include="Factories\MsFlowerFactory.cs" />
     <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
+    <Compile Include="Handler\FlowerHandler.cs" />
     <Compile Include="Models\AuthCredentials.cs" />
     <Compile Include="Models\MsEmployee.cs">
       <DependentUpon>NeinteenFlowerDBModel.tt</DependentUpon>
