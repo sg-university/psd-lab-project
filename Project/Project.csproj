@@ -89,6 +89,7 @@
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
       <LastGenOutput>NeinteenFlowerDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\ErrorPage.aspx" />
     <Content Include="Views\ForgotPasswordPage.aspx" />
     <Content Include="Views\InsertFlowerPage.aspx" />
     <Content Include="Views\LoginPage.aspx" />
@@ -103,7 +104,9 @@
     <Compile Include="Factories\MsFlowerFactory.cs" />
     <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
-    <Compile Include="Models\AuthCredentials.cs" />
+    <Compile Include="Handlers\MemberAuthenticationHandler.cs" />
+    <Compile Include="Handlers\EmployeeAuthenticationHandler.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\MsEmployee.cs">
       <DependentUpon>NeinteenFlowerDBModel.tt</DependentUpon>
     </Compile>
@@ -157,6 +160,13 @@
     </Compile>
     <Compile Include="Views\EmployeeNavigation.Master.designer.cs">
       <DependentUpon>EmployeeNavigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ForgotPasswordPage.aspx.cs">
       <DependentUpon>ForgotPasswordPage.aspx</DependentUpon>

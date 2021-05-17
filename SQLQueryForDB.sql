@@ -4,6 +4,34 @@ DROP TABLE IF EXISTS MsFlowerType;
 DROP TABLE IF EXISTS MsEmployee;
 DROP TABLE IF EXISTS MsMember;
 DROP TABLE IF EXISTS MsFlower;
+
+CREATE TABLE MsUser
+(UserID       UNIQUEIDENTIFIER primary key, 
+ UserName     VARCHAR(MAX), 
+ UserDOB      DATE, 
+ UserGender   VARCHAR(MAX), 
+ UserAddress  VARCHAR(MAX), 
+ UserPhone    VARCHAR(MAX), 
+ UserEmail    VARCHAR(MAX), 
+ UserPassword VARCHAR(MAX),
+ RoleID UNIQUEIDENTIFIER foreign key references MsUserRole(RoleID)
+);
+CREATE TABLE MsRole(
+ RoleID UNIQUEIDENTIFIER primary key,
+ RoleName varchar(max)
+)
+CREATE TABLE MsEmployee
+(EmployeeID       UNIQUEIDENTIFIER, 
+ EmployeeSalary   NUMERIC, 
+ UserID UNIQUEIDENTIFIER foreign key references MsUser(UserID),
+ CONSTRAINT PK_MSEmployee_EmployeeID PRIMARY KEY(EmployeeID)
+)
+CREATE TABLE MsMember
+(MemberID       UNIQUEIDENTIFIER, 
+ UserID UNIQUEIDENTIFIER foreign key references MsUser(UserID),
+ CONSTRAINT PK_MSMember_MemberID PRIMARY KEY(MemberID)
+);
+
 CREATE TABLE MsEmployee
 (EmployeeID       UNIQUEIDENTIFIER, 
  EmployeeName     VARCHAR(MAX), 
