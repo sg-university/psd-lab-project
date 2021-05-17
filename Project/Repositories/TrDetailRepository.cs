@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<TrDetail> result = db.TrDetails.ToList();
             return result;
         }
-        public TrDetail ReadOneByID(int ID)
+        public TrDetail ReadOneByID(Guid ID)
         {
             TrDetail result = this.ReadAll().Where(x => x.TransactionID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,7 +27,7 @@ namespace Project.Repositories
             TrDetail currentTrDetail = this.ReadAll().LastOrDefault();
             return currentTrDetail;
         }
-        public TrDetail UpdateOneByID(int ID, TrDetail toUpdateTrDetail)
+        public TrDetail UpdateOneByID(Guid ID, TrDetail toUpdateTrDetail)
         {
             TrDetail currentTrDetail = this.ReadOneByID(ID);
             currentTrDetail.FlowerID = toUpdateTrDetail.FlowerID;
@@ -35,7 +35,7 @@ namespace Project.Repositories
             db.SaveChanges();
             return currentTrDetail;
         }
-        public TrDetail DeleteOneByID(int ID)
+        public TrDetail DeleteOneByID(Guid ID)
         {
             TrDetail currentTrDetail = this.ReadOneByID(ID);
             db.TrDetails.Remove(currentTrDetail);

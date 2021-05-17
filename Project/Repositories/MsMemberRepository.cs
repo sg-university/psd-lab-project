@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<MsMember> result = db.MsMembers.ToList();
             return result;
         }
-        public MsMember ReadOneByID(int ID)
+        public MsMember ReadOneByID(Guid ID)
         {
             MsMember result = this.ReadAll().Where(x => x.MemberID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,7 +27,7 @@ namespace Project.Repositories
             MsMember currentMsMember = this.ReadAll().LastOrDefault();
             return currentMsMember;
         }
-        public MsMember UpdateOneByID(int ID, MsMember toUpdateMsMember)
+        public MsMember UpdateOneByID(Guid ID, MsMember toUpdateMsMember)
         {
             MsMember currentMsMember = this.ReadOneByID(ID);
             currentMsMember.MemberName = toUpdateMsMember.MemberName;
@@ -40,7 +40,7 @@ namespace Project.Repositories
             db.SaveChanges();
             return currentMsMember;
         }
-        public MsMember DeleteOneByID(int ID)
+        public MsMember DeleteOneByID(Guid ID)
         {
             MsMember currentMsMember = this.ReadOneByID(ID);
             db.MsMembers.Remove(currentMsMember);

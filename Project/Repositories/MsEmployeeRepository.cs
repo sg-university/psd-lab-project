@@ -15,7 +15,7 @@ namespace Project.Repositories
             List<MsEmployee> result = db.MsEmployees.ToList();
             return result;
         }
-        public MsEmployee ReadOneByID(int ID)
+        public MsEmployee ReadOneByID(Guid ID)
         {
             MsEmployee result = this.ReadAll().Where(x => x.EmployeeID.Equals(ID)).FirstOrDefault();
             return result;
@@ -27,7 +27,7 @@ namespace Project.Repositories
             MsEmployee currentMsEmployee = this.ReadAll().LastOrDefault();
             return currentMsEmployee;
         }
-        public MsEmployee UpdateOneByID(int ID, MsEmployee toUpdateMsEmployee)
+        public MsEmployee UpdateOneByID(Guid ID, MsEmployee toUpdateMsEmployee)
         {
             MsEmployee currentMsEmployee = this.ReadOneByID(ID);
             currentMsEmployee.EmployeeName = toUpdateMsEmployee.EmployeeName;
@@ -41,7 +41,7 @@ namespace Project.Repositories
             db.SaveChanges();
             return currentMsEmployee;
         }
-        public MsEmployee DeleteOneByID(int ID)
+        public MsEmployee DeleteOneByID(Guid ID)
         {
             MsEmployee currentMsEmployee = this.ReadOneByID(ID);
             db.MsEmployees.Remove(currentMsEmployee);
