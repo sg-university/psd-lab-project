@@ -8,7 +8,7 @@ namespace Project.Factory
 {
     public class MsFlowerFactory
     {
-        public MsFlower Create(Guid ID, string name, Guid typeID, string description, decimal price, string image)
+        public static MsFlower Create(Guid ID, string name, Guid typeID, string description, decimal price, string image)
         {
             MsFlower createdMsFlower = new MsFlower
             {
