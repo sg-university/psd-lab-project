@@ -16,7 +16,7 @@
     <br />
     
     <asp:Label ID="Label5" runat="server" Text="Upload picture:"></asp:Label>
-    <asp:FileUpload ID="FlowerUploadimg" runat="server" />
+    <asp:FileUpload ID="FlowerUploadImg" runat="server" />
     <br />
 
     <asp:Label ID="Label2" runat="server" Text="Description:"></asp:Label>
@@ -37,6 +37,8 @@
     <br />
 
     <asp:Label ID="ErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+    <br />
+    <asp:Label ID="SuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
     <br />
 
     <asp:Button ID="InsertFlowerbtn" runat="server" Text="Insert FLower" OnClick="InsertFlowerbtn_Click" />
