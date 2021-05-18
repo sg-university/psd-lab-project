@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Project.Controllers;
 using Project.Factory;
-using Project.Handler;
+using Project.Controllers;
+using Project.Models;
 
 namespace Project.Views
 {
@@ -19,12 +19,10 @@ namespace Project.Views
 
         protected void InsertFlowerbtn_Click(object sender, EventArgs e)
         {
-            ErrorMessage.Text = Validation.FlowerValidation(FlowerName.Text, Description.Text, price.Text);
-            if (String.IsNullOrEmpty(ErrorMessage.Text))
-            {
-
-                Response.Redirect("~/Views/ManageFlowerPage.aspx");
-            }
+            string imageFile = System.IO.Path.GetFileName(FlowerUploadImg.FileName);
+            Result res = MsFlowerController.InsertFlower(FlowerName.Text, imageFile, Description.Text, DropDownType.SelectedValue.ToString(), price.Text);
+            ErrorMessage.Text = res.ErrorMessage;
+            SuccessMessage.Text = res.SucessMessage;
         }
     }
 }
