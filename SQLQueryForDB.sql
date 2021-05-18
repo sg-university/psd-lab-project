@@ -42,6 +42,7 @@ CREATE TABLE MsEmployee
  EmployeeEmail    VARCHAR(MAX), 
  EmployeeSalary   NUMERIC, 
  EmployeePassword VARCHAR(MAX), 
+ EmployeeRole	  VARCHAR(MAX) default 'staff',
  CONSTRAINT PK_MSEmployee_EmployeeID PRIMARY KEY(EmployeeID)
 );
 CREATE TABLE MsMember
