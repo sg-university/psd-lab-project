@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,16 @@ namespace Project.Views
 {
     public partial class RegisterPage : System.Web.UI.Page
     {
+        MsEmployeeAuthenticationController MsEmployeeAuthenticationController = new MsEmployeeAuthenticationController();
+
+        MsMemberAuthenticationController MsMemberAuthenticationController = new MsMemberAuthenticationController();
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonRegister_Click(object sender, EventArgs e)
         {
 
         }
