@@ -21,8 +21,17 @@ namespace Project.Views
         {
             string imageFile = System.IO.Path.GetFileName(FlowerUploadImg.FileName);
             Result res = MsFlowerController.InsertFlower(FlowerName.Text, imageFile, Description.Text, DropDownType.SelectedValue.ToString(), price.Text);
-            ErrorMessage.Text = res.ErrorMessage;
-            SuccessMessage.Text = res.SucessMessage;
+            if (!String.IsNullOrEmpty(res.SuccessCode))
+            {
+                FlowerUploadImg.SaveAs(Server.MapPath("~/Image/" + FlowerName.Text + ".jpg"));
+                ErrorMessage.Text = "";
+                SuccessMessage.Text = res.SucessMessage;
+            }
+            else
+            {
+                SuccessMessage.Text = "";
+                ErrorMessage.Text = res.ErrorMessage;
+            }
         }
     }
 }
