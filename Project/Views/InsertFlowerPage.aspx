@@ -41,6 +41,6 @@
     <asp:Label ID="SuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
     <br />
 
-    <asp:Button ID="InsertFlowerbtn" runat="server" Text="Insert FLower" OnClick="InsertFlowerbtn_Click" />
+    <asp:Button ID="InsertFlowerbtn" runat="server" Text="Insert Flower" OnClick="InsertFlowerbtn_Click" />
  
 </asp:Content>

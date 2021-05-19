@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Project.Models;
-using Project.Repositories;
+using Project.Handlers;
 
 namespace Project.Controllers
 {
@@ -21,7 +21,7 @@ namespace Project.Controllers
             if (String.IsNullOrEmpty(uploadedImage) || !uploadedImage.ToLower().EndsWith(".jpg"))
             {
                 res.ErrorCode = "403";
-                res.ErrorMessage = "Only image with .jpg are allowed!";
+                res.ErrorMessage = "Image must be uploaded and only image with .jpg are allowed!";
                 return res;
             }
             if (String.IsNullOrEmpty(description) || description.Length < 50)
@@ -36,8 +36,7 @@ namespace Project.Controllers
                 res.ErrorMessage = "Price must be filled and between 20 and 100 inclusively!";
                 return res;
             }
-
-            
+            MsFlowerHandler.AddNewFlower(name, description, type, int.Parse(price));
             res.SuccessCode = "200";
             res.SucessMessage = "Flower Added!";
             return res;

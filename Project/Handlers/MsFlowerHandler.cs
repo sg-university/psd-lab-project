@@ -14,11 +14,12 @@ namespace Project.Handlers
         static MsFlowerRepository flowerRepo = new MsFlowerRepository();
         static MsFlowerTypeRepository typeRepo = new MsFlowerTypeRepository();
         static MsFlowerFactory flowerFac = new MsFlowerFactory();
-        public static void AddNewFlower(string name, string image, string description, string type, int price)
+
+        public static void AddNewFlower(string name, string description, string type, int price)
         {
             Guid id = new Guid();
-            Guid typeid = typeRepo.ReadAll().Where(x => x.FlowerTypeName.Equals(type)).FirstOrDefault().FlowerTypeID;
-            MsFlower newFlower = flowerFac.Create(id, name, typeid, description, price, image);
+            Guid typeid = typeRepo.ReadOneByTypeName(type).FlowerTypeID;
+            MsFlower newFlower = flowerFac.Create(id, name, typeid, description, price, "~/Image/"+name);
             flowerRepo.CreateOne(newFlower);
         }
         
