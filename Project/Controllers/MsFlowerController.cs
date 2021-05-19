@@ -18,7 +18,7 @@ namespace Project.Controllers
                 res.ErrorMessage = "Name must be filled and minimal length is 5 characters!";
                 return res;
             }
-            if (String.IsNullOrEmpty(uploadedImage) || !uploadedImage.EndsWith(".jpg"))
+            if (String.IsNullOrEmpty(uploadedImage) || !uploadedImage.ToLower().EndsWith(".jpg"))
             {
                 res.ErrorCode = "403";
                 res.ErrorMessage = "Only image with .jpg are allowed!";
@@ -27,7 +27,7 @@ namespace Project.Controllers
             if (String.IsNullOrEmpty(description) || description.Length < 50)
             {
                 res.ErrorCode = "403";
-                res.ErrorMessage = "Description must be longer than 50 characters!";
+                res.ErrorMessage = "Description must be filled and longer than 50 characters!";
                 return res;
             }
             if(String.IsNullOrEmpty(price) || int.Parse(price) < 20 || int.Parse(price) > 100)
@@ -36,6 +36,8 @@ namespace Project.Controllers
                 res.ErrorMessage = "Price must be filled and between 20 and 100 inclusively!";
                 return res;
             }
+
+            
             res.SuccessCode = "200";
             res.SucessMessage = "Flower Added!";
             return res;
