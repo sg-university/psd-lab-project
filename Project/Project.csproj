@@ -107,8 +107,11 @@
     <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
     <Compile Include="Handlers\MsFlowerHandler.cs" />
-    <Compile Include="Handlers\MsMemberAuthenticationHandler.cs" />
+    <Compile Include="Handlers\MsMemberAuthenticationHandler - Copy.cs" />
     <Compile Include="Handlers\MsEmployeeAuthenticationHandler.cs" />
+    <Compile Include="Handlers\MsEmployeeHandler.cs" />
+    <Compile Include="Handlers\MsFlowerTypeHandler.cs" />
+    <Compile Include="Handlers\MsMemberHandler.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\MsEmployee.cs">
       <DependentUpon>NeinteenFlowerDBModel.tt</DependentUpon>
@@ -235,7 +238,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Image\" />
+    <Folder Include="Assets\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
