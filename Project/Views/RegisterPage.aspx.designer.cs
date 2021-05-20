@@ -141,6 +141,33 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.Label LabelMessageAddress;
 
         /// <summary>
+        /// DropDownListRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRole;
+
+        /// <summary>
+        /// LabelRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRole;
+
+        /// <summary>
+        /// LabelMessageStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessageStatus;
+
+        /// <summary>
         /// ButtonRegister control.
         /// </summary>
         /// <remarks>

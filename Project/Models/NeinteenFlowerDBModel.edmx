@@ -18,6 +18,7 @@
           <Property Name="EmployeeEmail" Type="varchar(max)" />
           <Property Name="EmployeeSalary" Type="numeric" Precision="18" Scale="0" />
           <Property Name="EmployeePassword" Type="varchar(max)" />
+          <Property Name="EmployeeRole" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="MsFlower">
           <Key>
@@ -161,21 +162,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NeinteenFlowerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="MsEmployee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Guid" Nullable="false" />
-          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeDOB" Type="DateTime" Precision="0" />
-          <Property Name="EmployeeGender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeSalary" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="EmployeePassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TrHeaders" Relationship="Self.FK_TrHeader_MsEmployee_EmployeeID" FromRole="MsEmployee" ToRole="TrHeader" />
-        </EntityType>
         <EntityType Name="MsFlower">
           <Key>
             <PropertyRef Name="FlowerID" />
@@ -220,22 +206,10 @@
           <Property Name="EmployeeID" Type="Guid" />
           <Property Name="TransactionDate" Type="DateTime" Precision="3" />
           <Property Name="DiscountPercentage" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="MsEmployee" Relationship="Self.FK_TrHeader_MsEmployee_EmployeeID" FromRole="TrHeader" ToRole="MsEmployee" />
           <NavigationProperty Name="MsMember" Relationship="Self.FK_TrHeader_MsMember_MemberID" FromRole="TrHeader" ToRole="MsMember" />
           <NavigationProperty Name="TrDetails" Relationship="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID" FromRole="TrHeader" ToRole="TrDetail" />
+          <NavigationProperty Name="MsEmployee" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="TrHeader" ToRole="MsEmployee" />
         </EntityType>
-        <Association Name="FK_TrHeader_MsEmployee_EmployeeID">
-          <End Role="MsEmployee" Type="Self.MsEmployee" Multiplicity="0..1" />
-          <End Role="TrHeader" Type="Self.TrHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MsEmployee">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TrHeader">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MsFlower_MsFlowerType_FlowerTypeID">
           <End Role="MsFlowerType" Type="Self.MsFlowerType" Multiplicity="0..1" />
           <End Role="MsFlower" Type="Self.MsFlower" Multiplicity="*" />
@@ -261,15 +235,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="NeinteenFlowerDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="MsEmployees" EntityType="Self.MsEmployee" />
           <EntitySet Name="MsFlowers" EntityType="Self.MsFlower" />
           <EntitySet Name="MsFlowerTypes" EntityType="Self.MsFlowerType" />
           <EntitySet Name="MsMembers" EntityType="Self.MsMember" />
           <EntitySet Name="TrHeaders" EntityType="Self.TrHeader" />
-          <AssociationSet Name="FK_TrHeader_MsEmployee_EmployeeID" Association="Self.FK_TrHeader_MsEmployee_EmployeeID">
-            <End Role="MsEmployee" EntitySet="MsEmployees" />
-            <End Role="TrHeader" EntitySet="TrHeaders" />
-          </AssociationSet>
           <AssociationSet Name="FK_MsFlower_MsFlowerType_FlowerTypeID" Association="Self.FK_MsFlower_MsFlowerType_FlowerTypeID">
             <End Role="MsFlowerType" EntitySet="MsFlowerTypes" />
             <End Role="MsFlower" EntitySet="MsFlowers" />
@@ -286,6 +255,11 @@
           <AssociationSet Name="FK_TrDetail_TrHeader_TransactionID" Association="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID">
             <End Role="TrHeader" EntitySet="TrHeaders" />
             <End Role="TrDetail" EntitySet="TrDetails" />
+          </AssociationSet>
+          <EntitySet Name="MsEmployees" EntityType="NeinteenFlowerDBModel.MsEmployee" />
+          <AssociationSet Name="FK_TrHeader_MsEmployee_EmployeeID" Association="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID">
+            <End Role="MsEmployee" EntitySet="MsEmployees" />
+            <End Role="TrHeader" EntitySet="TrHeaders" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="TrDetail">
@@ -323,27 +297,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MsEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeDOB" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeGender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TrHeaders" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="MsEmployee" ToRole="TrHeader" />
+        </EntityType>
+        <Association Name="FK_TrHeader_MsEmployee_EmployeeID">
+          <End Type="NeinteenFlowerDBModel.MsEmployee" Role="MsEmployee" Multiplicity="0..1" />
+          <End Type="NeinteenFlowerDBModel.TrHeader" Role="TrHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsEmployee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TrHeader">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NeinteenFlowerDBModelStoreContainer" CdmEntityContainer="NeinteenFlowerDBEntities">
-          <EntitySetMapping Name="MsEmployees">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsEmployee">
-              <MappingFragment StoreEntitySet="MsEmployee">
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="EmployeeDOB" ColumnName="EmployeeDOB" />
-                <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
-                <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
-                <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
-                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
-                <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
-                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MsFlowers">
             <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlower">
               <MappingFragment StoreEntitySet="MsFlower">
@@ -396,6 +383,22 @@
                 <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsEmployees">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsEmployee">
+              <MappingFragment StoreEntitySet="MsEmployee">
+                <ScalarProperty Name="EmployeeRole" ColumnName="EmployeeRole" />
+                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+                <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
+                <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
+                <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
+                <ScalarProperty Name="EmployeeDOB" ColumnName="EmployeeDOB" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

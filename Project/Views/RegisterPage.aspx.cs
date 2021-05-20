@@ -1,8 +1,11 @@
 ﻿using Project.Controllers;
+using Project.Factory;
+using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,18 +13,88 @@ namespace Project.Views
 {
     public partial class RegisterPage : System.Web.UI.Page
     {
-        MsEmployeeAuthenticationController MsEmployeeAuthenticationController = new MsEmployeeAuthenticationController();
+        readonly MsEmployeeAuthenticationController MsEmployeeAuthenticationController = new MsEmployeeAuthenticationController();
 
-        MsMemberAuthenticationController MsMemberAuthenticationController = new MsMemberAuthenticationController();
+        readonly MsMemberAuthenticationController MsMemberAuthenticationController = new MsMemberAuthenticationController();
+
+        readonly MsMemberFactory MsMemberFactory = new MsMemberFactory();
+        readonly MsEmployeeFactory MsEmployeeFactory = new MsEmployeeFactory();
+
+        JavaScriptSerializer JSS = new JavaScriptSerializer();
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (!IsPostBack)
+            {
+                Boolean isAccountExists = HttpContext.Current.Response.Cookies.Get("account").Value != null;
+                if (isAccountExists)
+                {
+                    Object account = JSS.DeserializeObject(HttpContext.Current.Response.Cookies["account"].Value.ToString());
+                    HttpContext.Current.Session.Add("account", account);
+                    if (account.GetType() == typeof(MsMember))
+                    {
+                        HttpContext.Current.Response.Redirect("/Views/MemberHome.aspx");
+                    }
+                    else if (account.GetType() == typeof(MsEmployee))
+                    {
+                        String employeeRole = ((MsEmployee)account).EmployeeRole.ToString();
+                        if (employeeRole.Equals("staff"))
+                        {
+                            HttpContext.Current.Response.Redirect("/Views/EmployeeHome.aspx");
+                        }
+                        else if (employeeRole.Equals("admin"))
+                        {
+                            HttpContext.Current.Response.Redirect("/Views/AdministratorHome.aspx");
+                        }
+                    }
+                }
+            }
         }
 
         protected void ButtonRegister_Click(object sender, EventArgs e)
         {
+            Boolean isValid = true;
+            Result result = null;
 
+            String name = TextBoxName.Text.ToString();
+            DateTime DOB = DateTime.Parse(TextBoxDOB.Text.ToString());
+            String gender = DropDownListGender.SelectedValue.ToString();
+            String address = TextBoxAddress.Text.ToString();
+            String phone = TextBoxPhoneNumber.Text.ToString();
+            String email = TextBoxEmail.Text.ToString();
+            String password = TextBoxPassword.Text.ToString();
+            String role = DropDownListRole.SelectedValue.ToString();
+
+            switch (role)
+            {
+                case "member":
+                    MsMember toRegisterMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
+                    result = MsMemberAuthenticationController.Register(toRegisterMsMember);
+                    break;
+                case "staff":
+                    MsEmployee toRegisterMsEmployeeStaff = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, 0, email, password);
+                    result = MsEmployeeAuthenticationController.Register(toRegisterMsEmployeeStaff);
+                    break;
+                case "admin":
+                    MsEmployee toRegisterMsEmployeeAdmin = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, 0, email, password);
+                    result = MsEmployeeAuthenticationController.Register(toRegisterMsEmployeeAdmin);
+                    break;
+                default:
+                    break;
+            }
+
+            if (result.SuccessCode != null)
+            {
+                LabelMessageStatus.Text = result.SucessMessage.ToString();
+            }
+            if (result.ErrorCode != null)
+            {
+                LabelMessageStatus.Text = result.ErrorMessage.ToString();
+                return;
+            }
+
+            return;
         }
     }
 }

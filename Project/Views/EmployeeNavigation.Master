@@ -12,6 +12,7 @@
     <form id="form1" runat="server">
         <div>
             <a href="/Views/ManageFlowerPage.aspx">Manage Flower</a>
+            <a href="/Views/LogoutPage.aspx">Logout</a>
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

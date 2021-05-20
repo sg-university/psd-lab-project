@@ -26,9 +26,9 @@ namespace Project.Models
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public Nullable<decimal> DiscountPercentage { get; set; }
     
-        public virtual MsEmployee MsEmployee { get; set; }
         public virtual MsMember MsMember { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrDetail> TrDetails { get; set; }
+        public virtual MsEmployee MsEmployee { get; set; }
     }
 }
