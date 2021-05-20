@@ -21,7 +21,7 @@
         <asp:Label ID="LabelMessageName" Text="" runat="server" />
         <br />
         <asp:Label Text="Date of Birth" runat="server" />
-        <asp:TextBox ID="TextBoxDOB" TextMode="DateTime" runat="server" />
+        <asp:TextBox ID="TextBoxDOB" TextMode="Date" runat="server" />
         <asp:Label ID="LabelMessageDOB" Text="" runat="server" />
         <br />
         <asp:Label Text="Gender" runat="server" />

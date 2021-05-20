@@ -11,9 +11,10 @@ namespace Project.Views
 {
     public partial class InsertFlower : System.Web.UI.Page
     {
+        readonly MsFlowerController MsFlowerController = new MsFlowerController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void InsertFlowerbtn_Click(object sender, EventArgs e)
