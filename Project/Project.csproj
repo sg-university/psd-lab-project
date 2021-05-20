@@ -97,6 +97,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MsFlowerController.cs" />
     <Compile Include="Controllers\MsMemberAuthenticationController.cs" />
     <Compile Include="Controllers\MsEmployeeAuthenticationController.cs" />
     <Compile Include="Factories\TrDetailFactory.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Factories\MsFlowerFactory.cs" />
     <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
+    <Compile Include="Handlers\MsFlowerHandler.cs" />
     <Compile Include="Handlers\MsMemberAuthenticationHandler.cs" />
     <Compile Include="Handlers\MsEmployeeAuthenticationHandler.cs" />
     <Compile Include="Models\Result.cs" />
@@ -232,7 +234,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

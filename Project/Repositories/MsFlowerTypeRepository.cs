@@ -20,6 +20,11 @@ namespace Project.Repositories
             MsFlowerType result = this.ReadAll().Where(x => x.FlowerTypeID.Equals(ID)).FirstOrDefault();
             return result;
         }
+        public MsFlowerType ReadOneByTypeName(string typeName)
+        {
+            MsFlowerType result = this.ReadAll().Where(x => x.FlowerTypeName.Equals(typeName)).FirstOrDefault();
+            return result;
+        }
         public MsFlowerType CreateOne(MsFlowerType toCreateMsFlowerType)
         {
             db.MsFlowerTypes.Add(toCreateMsFlowerType);
