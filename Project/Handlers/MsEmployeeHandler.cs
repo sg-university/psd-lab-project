@@ -23,6 +23,7 @@ namespace Project.Handlers
         }
         public MsEmployee CreateOne(MsEmployee toCreateMsEmployee)
         {
+            toCreateMsEmployee.EmployeeID = Guid.NewGuid();
             MsEmployee result = MsEmployeeRepository.CreateOne(toCreateMsEmployee);
             return result;
         }

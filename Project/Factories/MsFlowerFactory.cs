@@ -22,5 +22,19 @@ namespace Project.Factory
 
             return createdMsFlower;
         }
+        public MsFlower Create(string name, Guid typeID, string description, decimal price, string image)
+        {
+            MsFlower createdMsFlower = new MsFlower
+            {
+                FlowerID = Guid.NewGuid(),
+                FlowerName = name,
+                FlowerTypeID = typeID,
+                FlowerDescription = description,
+                FlowerPrice = price,
+                FlowerImage = image,
+            };
+
+            return createdMsFlower;
+        }
     }
 }

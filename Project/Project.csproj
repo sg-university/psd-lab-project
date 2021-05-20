@@ -89,10 +89,14 @@
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
       <LastGenOutput>NeinteenFlowerDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\AdministratorHome.aspx" />
+    <Content Include="Views\EmployeeHome.aspx" />
     <Content Include="Views\ErrorPage.aspx" />
     <Content Include="Views\ForgotPasswordPage.aspx" />
     <Content Include="Views\InsertFlowerPage.aspx" />
     <Content Include="Views\LoginPage.aspx" />
+    <Content Include="Views\LogoutPage.aspx" />
+    <Content Include="Views\MemberHome.aspx" />
     <Content Include="Views\RegisterPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -154,12 +158,26 @@
     <Compile Include="Repositories\MsFlowerRepository.cs" />
     <Compile Include="Repositories\MsMemberRepository.cs" />
     <Compile Include="Repositories\MsEmployeeRepository.cs" />
+    <Compile Include="Views\AdministratorHome.aspx.cs">
+      <DependentUpon>AdministratorHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AdministratorHome.aspx.designer.cs">
+      <DependentUpon>AdministratorHome.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdministratorNavigation.Master.cs">
       <DependentUpon>AdministratorNavigation.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\AdministratorNavigation.Master.designer.cs">
       <DependentUpon>AdministratorNavigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeHome.aspx.cs">
+      <DependentUpon>EmployeeHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EmployeeHome.aspx.designer.cs">
+      <DependentUpon>EmployeeHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeNavigation.Master.cs">
       <DependentUpon>EmployeeNavigation.Master</DependentUpon>
@@ -202,6 +220,20 @@
     </Compile>
     <Compile Include="Views\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogoutPage.aspx.cs">
+      <DependentUpon>LogoutPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\LogoutPage.aspx.designer.cs">
+      <DependentUpon>LogoutPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberHome.aspx.cs">
+      <DependentUpon>MemberHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\MemberHome.aspx.designer.cs">
+      <DependentUpon>MemberHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\MemberNavigation.Master.cs">
       <DependentUpon>MemberNavigation.Master</DependentUpon>

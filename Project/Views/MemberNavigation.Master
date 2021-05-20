@@ -13,6 +13,7 @@
         <div>
             <a href="/Views/PreOrderPage.aspx">Pre Order</a>
             <a href="/Views/TransactionHistoryPage.aspx">Transaction History</a>
+            <a href="/Views/LogoutPage.aspx">Logout</a>
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

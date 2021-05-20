@@ -29,6 +29,7 @@ namespace Project.Models
         public string EmployeeEmail { get; set; }
         public Nullable<decimal> EmployeeSalary { get; set; }
         public string EmployeePassword { get; set; }
+        public string EmployeeRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrHeader> TrHeaders { get; set; }

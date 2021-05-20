@@ -26,7 +26,7 @@ namespace Project.Controllers
 
             MsMember registeredMsMember = MsMemberAuthenticationHandler.Register(toRegisterMsMember);
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to register a MsMember";
+            res.SucessMessage = "Succeed to register a Member";
             res.Data = registeredMsMember;
             return res;
         }
@@ -53,7 +53,7 @@ namespace Project.Controllers
             MsMember currentMsMember = MsMemberAuthenticationHandler.Login(email, password);
 
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to login a MsMember";
+            res.SucessMessage = "Succeed to login a Member";
             res.Data = currentMsMember;
 
             return res;
@@ -70,6 +70,29 @@ namespace Project.Controllers
                 return res;
             }
 
+            int alpha, digit, i;
+            alpha = digit = i = 0;
+            while (captcha[i] != '\0')
+            {
+                if ((captcha[i] >= 'a' && captcha[i] <= 'z') || (captcha[i] >= 'A' && captcha[i] <= 'Z'))
+                {
+                    alpha++;
+                }
+                else if (captcha[i] >= '0' && captcha[i] <= '9')
+                {
+                    digit++;
+                }
+                i++;
+            }
+
+            Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha == 3) && (digit == 3);
+            if (!isCaptchaConsistsOfThreeRandomLettersAndNumbers)
+            {
+                res.ErrorCode = "403";
+                res.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
+                return res;
+            }
+
             Boolean isPasswordEqualsCaptcha = password.Equals(captcha);
             if (!isPasswordEqualsCaptcha)
             {
@@ -81,7 +104,7 @@ namespace Project.Controllers
             MsMember passwordResetedMsMember = MsMemberAuthenticationHandler.ForgotPassword(email, password, captcha);
 
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to reset password a MsMember";
+            res.SucessMessage = "Succeed to reset password a Member";
             res.Data = passwordResetedMsMember;
 
             return res;

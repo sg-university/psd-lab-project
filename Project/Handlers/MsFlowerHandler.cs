@@ -32,6 +32,7 @@ namespace Project.Handlers
         }
         public MsFlower CreateOne(MsFlower toCreateMsFlower)
         {
+            toCreateMsFlower.FlowerID = Guid.NewGuid();
             MsFlower result = MsFlowerRepository.CreateOne(toCreateMsFlower);
             return result;
         }
