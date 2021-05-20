@@ -78,13 +78,13 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// DropDownType control.
+        /// DDType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownType;
+        protected global::System.Web.UI.WebControls.DropDownList DDType;
 
         /// <summary>
         /// Label4 control.
