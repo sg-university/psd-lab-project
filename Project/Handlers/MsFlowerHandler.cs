@@ -16,9 +16,7 @@ namespace Project.Handlers
 
         public void AddNewFlower(string name, string description, string type, int price)
         {
-            Guid id = new Guid();
-            Guid typeid = MsFlowerTypeRepository.ReadOneByTypeName(type).FlowerTypeID;
-            MsFlower newFlower = MsFlowerFactory.Create(id, name, typeid, description, price, "~/Assets/Images/" + name);
+            MsFlower newFlower = MsFlowerFactory.Create(Guid.NewGuid(), name, Guid.Parse(type), description, price, "~/Assets/Images/" + name);
             MsFlowerRepository.CreateOne(newFlower);
         }
 
@@ -34,6 +32,7 @@ namespace Project.Handlers
         }
         public MsFlower CreateOne(MsFlower toCreateMsFlower)
         {
+            toCreateMsFlower.FlowerID = Guid.NewGuid();
             MsFlower result = MsFlowerRepository.CreateOne(toCreateMsFlower);
             return result;
         }

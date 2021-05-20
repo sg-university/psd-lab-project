@@ -11,7 +11,7 @@ namespace Project.Views
 {
 
 
-    public partial class LoginPage1
+    public partial class LoginPage
     {
 
         /// <summary>
@@ -49,6 +49,33 @@ namespace Project.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
+
+        /// <summary>
+        /// DropDownListRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListRole;
+
+        /// <summary>
+        /// LabelRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRole;
+
+        /// <summary>
+        /// LabelMessageStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessageStatus;
 
         /// <summary>
         /// ButtonLogin control.

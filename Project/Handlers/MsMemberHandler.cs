@@ -23,6 +23,7 @@ namespace Project.Handlers
         }
         public MsMember CreateOne(MsMember toCreateMsMember)
         {
+            toCreateMsMember.MemberID = Guid.NewGuid();
             MsMember result = MsMemberRepository.CreateOne(toCreateMsMember);
             return result;
         }

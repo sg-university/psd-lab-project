@@ -23,6 +23,7 @@ namespace Project.Handlers
         }
         public MsFlowerType CreateOne(MsFlowerType toCreateMsFlowerType)
         {
+            toCreateMsFlowerType.FlowerTypeID = Guid.NewGuid();
             MsFlowerType result = MsFlowerTypeRepository.CreateOne(toCreateMsFlowerType);
             return result;
         }

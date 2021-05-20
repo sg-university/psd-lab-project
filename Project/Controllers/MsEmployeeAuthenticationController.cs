@@ -27,7 +27,7 @@ namespace Project.Controllers
 
             MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(toRegisterMsEmployee);
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to register a MsEmployee";
+            res.SucessMessage = "Succeed to register a Employee";
             res.Data = registeredMsEmployee;
 
             return res;
@@ -55,7 +55,7 @@ namespace Project.Controllers
             MsEmployee currentMsEmployee = MsEmployeeHandler.ReadAll().Find(x => x.EmployeeEmail.Equals(email) && x.EmployeePassword.Equals(password));
 
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to login a MsEmployee";
+            res.SucessMessage = "Succeed to login a Employee";
             res.Data = currentMsEmployee;
 
             return res;
@@ -69,6 +69,29 @@ namespace Project.Controllers
             {
                 res.ErrorCode = "403";
                 res.ErrorMessage = "Email must be registered";
+                return res;
+            }
+
+            int alpha, digit, i;
+            alpha = digit = i = 0;
+            while (captcha[i] != '\0')
+            {
+                if ((captcha[i] >= 'a' && captcha[i] <= 'z') || (captcha[i] >= 'A' && captcha[i] <= 'Z'))
+                {
+                    alpha++;
+                }
+                else if (captcha[i] >= '0' && captcha[i] <= '9')
+                {
+                    digit++;
+                }
+                i++;
+            }
+
+            Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha == 3) && (digit == 3);
+            if (!isCaptchaConsistsOfThreeRandomLettersAndNumbers)
+            {
+                res.ErrorCode = "403";
+                res.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
                 return res;
             }
 
@@ -87,7 +110,7 @@ namespace Project.Controllers
             MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee);
 
             res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to reset password a MsEmployee";
+            res.SucessMessage = "Succeed to reset password a Employee";
             res.Data = updatedMsEmployee;
 
             return res;
