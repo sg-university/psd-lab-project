@@ -25,10 +25,7 @@
     <br />
 
     <asp:Label ID="Label3" runat="server" Text="Type:"></asp:Label>
-    <asp:DropDownList ID="DropDownType" runat="server">
-        <asp:ListItem>Daisies</asp:ListItem>
-        <asp:ListItem>Lilies</asp:ListItem>
-        <asp:ListItem>Roses</asp:ListItem>
+    <asp:DropDownList ID="DDType" runat="server">
     </asp:DropDownList>
     <br />
 

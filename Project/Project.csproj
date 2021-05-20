@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MsFlowerController.cs" />
+    <Compile Include="Controllers\MsFlowerTypeController.cs" />
     <Compile Include="Controllers\MsMemberAuthenticationController.cs" />
     <Compile Include="Controllers\MsEmployeeAuthenticationController.cs" />
     <Compile Include="Factories\TrDetailFactory.cs" />
