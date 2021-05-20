@@ -21,5 +21,19 @@ namespace Project.Factory
 
             return createdTrHeader;
         }
+
+        public TrHeader Create(Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
+        {
+            TrHeader createdTrHeader = new TrHeader
+            {
+                TransactionID = Guid.NewGuid(),
+                MemberID = memberID,
+                EmployeeID = employeeID,
+                TransactionDate = transactionDate,
+                DiscountPercentage = discountPercentage,
+            };
+
+            return createdTrHeader;
+        }
     }
 }

@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NeinteenFlowerDBModelStoreContainer" CdmEntityContainer="NeinteenFlowerDBEntities">
-    <EntitySetMapping Name="MsEmployees">
-      <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsEmployee">
-        <MappingFragment StoreEntitySet="MsEmployee">
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-          <ScalarProperty Name="EmployeeDOB" ColumnName="EmployeeDOB" />
-          <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
-          <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
-          <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
-          <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
-          <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
-          <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MsFlowers">
       <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlower">
         <MappingFragment StoreEntitySet="MsFlower">
@@ -68,6 +53,22 @@
           <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
           <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
           <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MsEmployees">
+      <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsEmployee">
+        <MappingFragment StoreEntitySet="MsEmployee">
+          <ScalarProperty Name="EmployeeRole" ColumnName="EmployeeRole" />
+          <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+          <ScalarProperty Name="EmployeeSalary" ColumnName="EmployeeSalary" />
+          <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+          <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
+          <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
+          <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
+          <ScalarProperty Name="EmployeeDOB" ColumnName="EmployeeDOB" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -13,6 +13,7 @@
         <div>
             <a href="/Views/ManageMemberPage.aspx">Manage Member</a>
             <a href="/Views/ManageEmployeePage.aspx">Manage Employee</a>
+            <a href="/Views/LogoutPage.aspx">Logout</a>
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

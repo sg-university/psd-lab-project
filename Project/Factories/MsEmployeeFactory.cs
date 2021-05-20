@@ -8,7 +8,7 @@ namespace Project.Factory
 {
     public class MsEmployeeFactory
     {
-        public MsEmployee Create(Guid ID, string name, DateTime DOB, string gender, string address, string phone, string email, decimal salary, string password)
+        public MsEmployee Create(Guid ID, string name, DateTime DOB, string gender, string address, string phone, string role, decimal salary, string email, string password)
         {
             MsEmployee createdMsEmployee = new MsEmployee
             {
@@ -18,8 +18,28 @@ namespace Project.Factory
                 EmployeeGender = gender,
                 EmployeeAddress = address,
                 EmployeePhone = phone,
-                EmployeeEmail = email,
+                EmployeeRole = role,
                 EmployeeSalary = salary,
+                EmployeeEmail = email,
+                EmployeePassword = password
+            };
+
+            return createdMsEmployee;
+        }
+
+        public MsEmployee Create(string name, DateTime DOB, string gender, string address, string phone, string role, decimal salary, string email, string password)
+        {
+            MsEmployee createdMsEmployee = new MsEmployee
+            {
+                EmployeeID = Guid.NewGuid(),
+                EmployeeName = name,
+                EmployeeDOB = DOB,
+                EmployeeGender = gender,
+                EmployeeAddress = address,
+                EmployeePhone = phone,
+                EmployeeRole = role,
+                EmployeeSalary = salary,
+                EmployeeEmail = email,
                 EmployeePassword = password
             };
 

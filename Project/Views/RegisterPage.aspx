@@ -40,6 +40,16 @@
         <asp:TextBox ID="TextBoxAddress" runat="server" />
         <asp:Label ID="LabelMessageAddress" Text="" runat="server" />
         <br />
-        <asp:Button ID="ButtonRegister" Text="Register" runat="server" OnClick="ButtonRegister_Click" />
+        <asp:Label Text="Role" runat="server" />
+        <asp:DropDownList ID="DropDownListRole" runat="server">
+            <asp:ListItem Value="member">Member</asp:ListItem>
+            <asp:ListItem Value="staff">Staff (Basic Employee)</asp:ListItem>
+            <asp:ListItem Value="admin">Admin (Special Employee)</asp:ListItem>
+        </asp:DropDownList>
+        <asp:Label ID="LabelRole" Text="" runat="server" />
+        <br />
+        <asp:Label ID="LabelMessageStatus" Text="" runat="server" />
+        <br />
+        <asp:Button ID="ButtonRegister" Text="Register" runat="server" OnClick="ButtonRegister_Click"  />
     </div>
 </asp:Content>

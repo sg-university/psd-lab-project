@@ -13,6 +13,7 @@
     <Property Name="EmployeeEmail" Type="varchar(max)" />
     <Property Name="EmployeeSalary" Type="numeric" Precision="18" Scale="0" />
     <Property Name="EmployeePassword" Type="varchar(max)" />
+    <Property Name="EmployeeRole" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="MsFlower">
     <Key>

@@ -18,5 +18,16 @@ namespace Project.Factory
 
             return createdMsFlowerType;
         }
+
+        public MsFlowerType Create(string name)
+        {
+            MsFlowerType createdMsFlowerType = new MsFlowerType
+            {
+                FlowerTypeID = Guid.NewGuid(),
+                FlowerTypeName = name
+            };
+
+            return createdMsFlowerType;
+        }
     }
 }
