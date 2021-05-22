@@ -24,31 +24,8 @@ namespace Project.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-                Boolean isAccountExists = HttpContext.Current.Response.Cookies.Get("account").Value != null;
-                if (isAccountExists)
-                {
-                    Object account = JSS.DeserializeObject(HttpContext.Current.Response.Cookies["account"].Value.ToString());
-                    HttpContext.Current.Session.Add("account", account);
-                    if (account.GetType() == typeof(MsMember))
-                    {
-                        HttpContext.Current.Response.Redirect("/Views/MemberHome.aspx");
-                    }
-                    else if (account.GetType() == typeof(MsEmployee))
-                    {
-                        String employeeRole = ((MsEmployee)account).EmployeeRole.ToString();
-                        if (employeeRole.Equals("staff"))
-                        {
-                            HttpContext.Current.Response.Redirect("/Views/EmployeeHome.aspx");
-                        }
-                        else if (employeeRole.Equals("admin"))
-                        {
-                            HttpContext.Current.Response.Redirect("/Views/AdministratorHome.aspx");
-                        }
-                    }
-                }
             }
         }
 

@@ -11,9 +11,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <a href="/Views/LoginPage.aspx">Login</a>
-            <a href="/Views/RegisterPage.aspx">Register</a>
-            <a href="/Views/ForgotPasswordPage.aspx">Forgot Password</a>
+            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" />
+            <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" />
+            <asp:Button ID="ButtonForgotPassword" runat="server" Text="Forgot Password" OnClick="ButtonForgotPassword_Click" />
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

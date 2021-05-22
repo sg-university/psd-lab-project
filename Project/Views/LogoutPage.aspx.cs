@@ -13,8 +13,10 @@ namespace Project.Views
         {
             if (!IsPostBack)
             {
-                HttpContext.Current.Response.Cookies.Clear();
+                HttpContext.Current.Request.Cookies["account"].Expires = DateTime.Now.AddDays(-1);
+                HttpContext.Current.Response.Cookies["account"].Expires = DateTime.Now.AddDays(-1);
                 HttpContext.Current.Session.Clear();
+                HttpContext.Current.Session.Abandon();
                 Response.Redirect("/Views/LoginPage.aspx");
             }
         }

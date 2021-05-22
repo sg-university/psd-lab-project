@@ -15,59 +15,59 @@ namespace Project.Controllers
 
         public Result Register(MsMember toRegisterMsMember)
         {
-            Result res = new Result();
+            Result result = new Result();
             Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(toRegisterMsMember.MemberEmail));
             if (isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be unique and not registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be unique and not registered";
+                return result;
             }
 
             MsMember registeredMsMember = MsMemberAuthenticationHandler.Register(toRegisterMsMember);
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to register a Member";
-            res.Data = registeredMsMember;
-            return res;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to register a Member";
+            result.Data = registeredMsMember;
+            return result;
         }
 
         public Result Login(String email, String password)
         {
-            Result res = new Result();
+            Result result = new Result();
             Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email));
             if (!isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be registered";
+                return result;
             }
 
             Boolean isCredentialsValid = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email) && x.MemberPassword.Equals(password));
             if (!isCredentialsValid)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Invalid credentials";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Invalid credentials";
+                return result;
             }
 
             MsMember currentMsMember = MsMemberAuthenticationHandler.Login(email, password);
 
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to login a Member";
-            res.Data = currentMsMember;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to login a Member";
+            result.Data = currentMsMember;
 
-            return res;
+            return result;
         }
 
         public Result ForgotPassword(String email, String password, String captcha)
         {
-            Result res = new Result();
+            Result result = new Result();
             Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email));
             if (!isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be registered";
+                return result;
             }
 
             int alpha, digit, i;
@@ -88,26 +88,26 @@ namespace Project.Controllers
             Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha == 3) && (digit == 3);
             if (!isCaptchaConsistsOfThreeRandomLettersAndNumbers)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
+                return result;
             }
 
             Boolean isPasswordEqualsCaptcha = password.Equals(captcha);
             if (!isPasswordEqualsCaptcha)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Password and captcha must be equals";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Password and captcha must be equals";
+                return result;
             }
 
             MsMember passwordResetedMsMember = MsMemberAuthenticationHandler.ForgotPassword(email, password, captcha);
 
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to reset password a Member";
-            res.Data = passwordResetedMsMember;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to reset password a Member";
+            result.Data = passwordResetedMsMember;
 
-            return res;
+            return result;
         }
     }
 }
