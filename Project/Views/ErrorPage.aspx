@@ -9,7 +9,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Error 404: not found.
+            <h1>Error Page</h1>
+        </div>
+        <div>
+            404: Not found.
         </div>
     </form>
 </body>

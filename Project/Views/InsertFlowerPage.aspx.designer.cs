@@ -24,49 +24,13 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// FlowerName control.
+        /// TextBoxName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FlowerName;
-
-        /// <summary>
-        /// Label5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
-
-        /// <summary>
-        /// FlowerUploadImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FlowerUploadImg;
-
-        /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// Description control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Description;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxName;
 
         /// <summary>
         /// Label3 control.
@@ -78,13 +42,31 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// DDType control.
+        /// DropDownListType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDType;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListType;
+
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// TextBoxDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
 
         /// <summary>
         /// Label4 control.
@@ -96,39 +78,57 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// price control.
+        /// TextBoxPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox price;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPrice;
 
         /// <summary>
-        /// ErrorMessage control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorMessage;
+        protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// SuccessMessage control.
+        /// FileUploadImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SuccessMessage;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
 
         /// <summary>
-        /// InsertFlowerbtn control.
+        /// LabelMessageSuccess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button InsertFlowerbtn;
+        protected global::System.Web.UI.WebControls.Label LabelMessageSuccess;
+
+        /// <summary>
+        /// LabelMessageError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessageError;
+
+        /// <summary>
+        /// ButtonInsert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonInsert;
     }
 }

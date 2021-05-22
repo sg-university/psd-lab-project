@@ -11,9 +11,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <a href="/Views/ManageMemberPage.aspx">Manage Member</a>
-            <a href="/Views/ManageEmployeePage.aspx">Manage Employee</a>
-            <a href="/Views/LogoutPage.aspx">Logout</a>
+            <asp:Button ID="ButtonManageMember" runat="server" Text="Manage Member" OnClick="ButtonManageMember_Click" />
+            <asp:Button ID="ButtonManageEmployee" runat="server" Text="Manage Employee" OnClick="ButtonManageEmployee_Click" />
+            <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click" />
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

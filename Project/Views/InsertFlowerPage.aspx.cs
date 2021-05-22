@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Project.Controllers;
+using Project.Factory;
 using Project.Models;
 
 namespace Project.Views
@@ -13,32 +14,41 @@ namespace Project.Views
     {
         readonly MsFlowerController MsFlowerController = new MsFlowerController();
         readonly MsFlowerTypeController MsFlowerTypeController = new MsFlowerTypeController();
+        readonly MsFlowerFactory MsFlowerFactory = new MsFlowerFactory();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                List<MsFlowerType> type = MsFlowerTypeController.GetAllType();
-                DDType.DataSource = type;
-                DDType.DataTextField = "FlowerTypeName";
-                DDType.DataValueField = "FlowerTypeID";
-                DDType.DataBind();
+                Result resultAllFlowerType = MsFlowerTypeController.ReadAll();
+                List<MsFlowerType> type = (List<MsFlowerType>)resultAllFlowerType.Data;
+                DropDownListType.DataSource = type;
+                DropDownListType.DataTextField = "FlowerTypeName";
+                DropDownListType.DataValueField = "FlowerTypeID";
+                DropDownListType.DataBind();
             }
         }
 
-        protected void InsertFlowerbtn_Click(object sender, EventArgs e)
+
+        protected void ButtonInsert_Click(object sender, EventArgs e)
         {
-            string imageFile = System.IO.Path.GetFileName(FlowerUploadImg.FileName);
-            Result res = MsFlowerController.InsertFlower(FlowerName.Text, imageFile, Description.Text, DDType.SelectedValue, price.Text);
-            if (!String.IsNullOrEmpty(res.SuccessCode))
+            String name = TextBoxName.Text.ToString();
+            Guid typeID = Guid.Parse(DropDownListType.SelectedValue.ToString());
+            String description = TextBoxDescription.Text.ToString();
+            Decimal price = Decimal.Parse(TextBoxPrice.Text.ToString());
+            String image = System.IO.Path.GetFileName(FileUploadImage.FileName);
+
+            MsFlower toCreateMsFlower = MsFlowerFactory.Create(name, typeID, description, price, image);
+            Result result = MsFlowerController.CreateOne(toCreateMsFlower);
+
+            if (!String.IsNullOrEmpty(result.SuccessCode))
             {
-                FlowerUploadImg.SaveAs(Server.MapPath("~/Assets/Images/" + FlowerName.Text + ".jpg"));
-                ErrorMessage.Text = "";
-                SuccessMessage.Text = res.SucessMessage;
+                FileUploadImage.SaveAs(Server.MapPath("~/Assets/Images/" + name + ".jpg"));
+                LabelMessageSuccess.Text = result.SucessMessage;
             }
             else
             {
-                SuccessMessage.Text = "";
-                ErrorMessage.Text = res.ErrorMessage;
+                LabelMessageError.Text = result.ErrorMessage;
             }
         }
     }
