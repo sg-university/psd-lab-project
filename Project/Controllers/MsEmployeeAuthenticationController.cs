@@ -16,60 +16,144 @@ namespace Project.Controllers
 
         public Result Register(MsEmployee toRegisterMsEmployee)
         {
-            Result res = new Result();
+            Result result = new Result();
+
+            Boolean isEmailValid = toRegisterMsEmployee.EmployeeEmail.Contains("@") && toRegisterMsEmployee.EmployeeEmail.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(toRegisterMsEmployee.EmployeeEmail));
             if (isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be unique and not registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be unique and not registered";
+                return result;
+            }
+
+            Boolean isPasswordValid = (3 <= toRegisterMsEmployee.EmployeePassword.Length) && (toRegisterMsEmployee.EmployeePassword.Length <= 20);
+            if (!isPasswordValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Password must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isNameValid = (3 <= toRegisterMsEmployee.EmployeeName.Length) && (toRegisterMsEmployee.EmployeeName.Length <= 20);
+            if (!isNameValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Name must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isDOBValid = Math.Abs(toRegisterMsEmployee.EmployeeDOB.Value.Year - DateTime.Now.Year) >= 17;
+            if (!isDOBValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be minimal age of 17 years old";
+                return result;
+            }
+
+            Boolean isGenderValid = !String.IsNullOrEmpty(toRegisterMsEmployee.EmployeeGender) && new List<String> { "other", "male", "female" }.Contains(toRegisterMsEmployee.EmployeeGender);
+            if (!isGenderValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Gender must be chosen either male, female, or other";
+                return result;
+            }
+
+            Boolean isPhoneNumberValid = true;
+            try
+            {
+                Decimal.Parse(toRegisterMsEmployee.EmployeePhone);
+            }
+            catch
+            {
+                isPhoneNumberValid = false;
+            }
+
+            if (!isPhoneNumberValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Phone Number must be numeric";
+                return result;
+            }
+
+            Boolean isAddressValid = toRegisterMsEmployee.EmployeeAddress.ToLower().Contains("street");
+            if (!isAddressValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Address must be contains 'street'";
+                return result;
             }
 
             MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(toRegisterMsEmployee);
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to register a Employee";
-            res.Data = registeredMsEmployee;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to register a Employee";
+            result.Data = registeredMsEmployee;
 
-            return res;
+            return result;
         }
 
         public Result Login(String email, String password)
         {
-            Result res = new Result();
+            Result result = new Result();
+
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email));
             if (!isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be registered";
+                return result;
             }
 
             Boolean isCredentialsValid = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email) && x.EmployeePassword.Equals(password));
             if (!isCredentialsValid)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Invalid credentials";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Invalid credentials";
+                return result;
             }
 
             MsEmployee currentMsEmployee = MsEmployeeHandler.ReadAll().Find(x => x.EmployeeEmail.Equals(email) && x.EmployeePassword.Equals(password));
 
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to login a Employee";
-            res.Data = currentMsEmployee;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to login a Employee";
+            result.Data = currentMsEmployee;
 
-            return res;
+            return result;
         }
 
         public Result ForgotPassword(String email, String password, String captcha)
         {
-            Result res = new Result();
+            Result result = new Result();
+
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email));
             if (!isEmailRegistered)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Email must be registered";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be registered";
+                return result;
             }
 
             int alpha, digit, i;
@@ -90,17 +174,17 @@ namespace Project.Controllers
             Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha == 3) && (digit == 3);
             if (!isCaptchaConsistsOfThreeRandomLettersAndNumbers)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
+                return result;
             }
 
             Boolean isPasswordEqualsCaptcha = password.Equals(captcha);
             if (!isPasswordEqualsCaptcha)
             {
-                res.ErrorCode = "403";
-                res.ErrorMessage = "Password and captcha must be equals";
-                return res;
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Password and captcha must be equals";
+                return result;
             }
 
             MsEmployee currentMsEmployee = MsEmployeeHandler.ReadAll().Find(x => x.EmployeeEmail.Equals(email));
@@ -109,11 +193,11 @@ namespace Project.Controllers
 
             MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee);
 
-            res.SuccessCode = "200";
-            res.SucessMessage = "Succeed to reset password a Employee";
-            res.Data = updatedMsEmployee;
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to reset password a Employee";
+            result.Data = updatedMsEmployee;
 
-            return res;
+            return result;
         }
     }
 }

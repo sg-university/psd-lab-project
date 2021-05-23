@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Project.Views
 {
-    public partial class AdministratorHome : System.Web.UI.Page
+    public partial class AdministratorHomePage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

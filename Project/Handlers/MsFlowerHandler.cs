@@ -14,12 +14,6 @@ namespace Project.Handlers
         readonly MsFlowerTypeRepository MsFlowerTypeRepository = new MsFlowerTypeRepository();
         readonly MsFlowerFactory MsFlowerFactory = new MsFlowerFactory();
 
-        public void AddNewFlower(string name, string description, string type, int price)
-        {
-            MsFlower newFlower = MsFlowerFactory.Create(Guid.NewGuid(), name, Guid.Parse(type), description, price, "~/Assets/Images/" + name);
-            MsFlowerRepository.CreateOne(newFlower);
-        }
-
         public List<MsFlower> ReadAll()
         {
             List<MsFlower> result = MsFlowerRepository.ReadAll();
@@ -33,6 +27,7 @@ namespace Project.Handlers
         public MsFlower CreateOne(MsFlower toCreateMsFlower)
         {
             toCreateMsFlower.FlowerID = Guid.NewGuid();
+            //toCreateMsFlower.FlowerImage = "~/Assets/Images/" + Guid.NewGuid().ToString();
             MsFlower result = MsFlowerRepository.CreateOne(toCreateMsFlower);
             return result;
         }

@@ -22,28 +22,6 @@ namespace Project.Views
         {
             if (!IsPostBack)
             {
-                Boolean isAccountExists = HttpContext.Current.Response.Cookies.Get("account").Value != null;
-                if (isAccountExists)
-                {
-                    Object account = JSS.DeserializeObject(HttpContext.Current.Response.Cookies["account"].Value.ToString());
-                    HttpContext.Current.Session.Add("account", account);
-                    if (account.GetType() == typeof(MsMember))
-                    {
-                        HttpContext.Current.Response.Redirect("/Views/MemberHome.aspx");
-                    }
-                    else if (account.GetType() == typeof(MsEmployee))
-                    {
-                        String employeeRole = ((MsEmployee)account).EmployeeRole.ToString();
-                        if (employeeRole.Equals("staff"))
-                        {
-                            HttpContext.Current.Response.Redirect("/Views/EmployeeHome.aspx");
-                        }
-                        else if (employeeRole.Equals("admin"))
-                        {
-                            HttpContext.Current.Response.Redirect("/Views/AdministratorHome.aspx");
-                        }
-                    }
-                }
             }
         }
 
@@ -78,26 +56,48 @@ namespace Project.Views
                 return;
             }
 
-            HttpContext.Current.Session.Add("account", result.Data);
             HttpCookie httpCookie = new HttpCookie("account");
-            httpCookie.Value = JSS.Serialize(result.Data);
             httpCookie.Expires = DateTime.Now.AddDays(1);
-            HttpContext.Current.Response.Cookies.Add(httpCookie);
 
             switch (role)
             {
                 case "member":
-                    Response.Redirect("/Views/MemberHome.aspx");
+                    httpCookie["id"] = ((MsMember)result.Data).MemberID.ToString();
+                    httpCookie["role"] = "member";
                     break;
                 case "employee":
                     String employeeRole = ((MsEmployee)result.Data).EmployeeRole.ToString();
                     if (employeeRole.Equals("staff"))
                     {
-                        HttpContext.Current.Response.Redirect("/Views/EmployeeHome.aspx");
+                        httpCookie["id"] = ((MsEmployee)result.Data).EmployeeID.ToString();
+                        httpCookie["role"] = "staff";
                     }
                     else if (employeeRole.Equals("admin"))
                     {
-                        HttpContext.Current.Response.Redirect("/Views/AdministratorHome.aspx");
+                        httpCookie["id"] = ((MsEmployee)result.Data).EmployeeID.ToString();
+                        httpCookie["role"] = "admin";
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            HttpContext.Current.Response.Cookies.Add(httpCookie);
+
+            switch (role)
+            {
+                case "member":
+                    Response.Redirect("/Views/MemberHomePage.aspx");
+                    break;
+                case "employee":
+                    String employeeRole = ((MsEmployee)result.Data).EmployeeRole.ToString();
+                    if (employeeRole.Equals("staff"))
+                    {
+                        HttpContext.Current.Response.Redirect("/Views/EmployeeHomePage.aspx");
+                    }
+                    else if (employeeRole.Equals("admin"))
+                    {
+                        HttpContext.Current.Response.Redirect("/Views/AdministratorHomePage.aspx");
                     }
                     break;
                 default:

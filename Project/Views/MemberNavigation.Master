@@ -11,9 +11,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <a href="/Views/PreOrderPage.aspx">Pre Order</a>
-            <a href="/Views/TransactionHistoryPage.aspx">Transaction History</a>
-            <a href="/Views/LogoutPage.aspx">Logout</a>
+            <asp:Button ID="ButtonPreOrder" runat="server" Text="Pre Order" OnClick="ButtonPreOrder_Click" />
+            <asp:Button ID="ButtonTransactionHistory" runat="server" Text="Transaction History" OnClick="ButtonTransactionHistory_Click" />
+            <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click" />
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
