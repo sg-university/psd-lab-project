@@ -17,11 +17,77 @@ namespace Project.Controllers
         public Result Register(MsEmployee toRegisterMsEmployee)
         {
             Result result = new Result();
+
+            Boolean isEmailValid = toRegisterMsEmployee.EmployeeEmail.Contains("@") && toRegisterMsEmployee.EmployeeEmail.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(toRegisterMsEmployee.EmployeeEmail));
             if (isEmailRegistered)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Email must be unique and not registered";
+                return result;
+            }
+
+            Boolean isPasswordValid = (3 <= toRegisterMsEmployee.EmployeePassword.Length) && (toRegisterMsEmployee.EmployeePassword.Length <= 20);
+            if (!isPasswordValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Password must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isNameValid = (3 <= toRegisterMsEmployee.EmployeeName.Length) && (toRegisterMsEmployee.EmployeeName.Length <= 20);
+            if (!isNameValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Name must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isDOBValid = Math.Abs(toRegisterMsEmployee.EmployeeDOB.Value.Year - DateTime.Now.Year) >= 17;
+            if (!isDOBValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be minimal age of 17 years old";
+                return result;
+            }
+
+            Boolean isGenderValid = !String.IsNullOrEmpty(toRegisterMsEmployee.EmployeeGender) && new List<String> { "other", "male", "female" }.Contains(toRegisterMsEmployee.EmployeeGender);
+            if (!isGenderValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Gender must be chosen either male, female, or other";
+                return result;
+            }
+
+            Boolean isPhoneNumberValid = true;
+            try
+            {
+                Decimal.Parse(toRegisterMsEmployee.EmployeePhone);
+            }
+            catch
+            {
+                isPhoneNumberValid = false;
+            }
+
+            if (!isPhoneNumberValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Phone Number must be numeric";
+                return result;
+            }
+
+            Boolean isAddressValid = toRegisterMsEmployee.EmployeeAddress.ToLower().Contains("street");
+            if (!isAddressValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Address must be contains 'street'";
                 return result;
             }
 
@@ -36,6 +102,15 @@ namespace Project.Controllers
         public Result Login(String email, String password)
         {
             Result result = new Result();
+
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email));
             if (!isEmailRegistered)
             {
@@ -64,6 +139,15 @@ namespace Project.Controllers
         public Result ForgotPassword(String email, String password, String captcha)
         {
             Result result = new Result();
+
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
+            if (!isEmailValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Email must be contains '@' and '.'";
+                return result;
+            }
+
             Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email));
             if (!isEmailRegistered)
             {

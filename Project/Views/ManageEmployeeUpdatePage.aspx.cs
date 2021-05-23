@@ -36,22 +36,25 @@ namespace Project.Views
                 }
                 catch
                 {
-                    Response.Redirect("/Views/ErrorPage.aspx");
+                    HttpContext.Current.Response.Redirect("/Views/ErrorPage.aspx");
                 }
             }
         }
 
         protected void ButtonUpdate_Click(object sender, EventArgs e)
         {
-            Guid ID = Guid.Parse(HttpContext.Current.Request["ID"].ToString());
+            Guid ID = Guid.Empty;
+            Guid.TryParse(HttpContext.Current.Request["ID"].ToString(), out ID);
             String name = TextBoxName.Text.ToString();
-            DateTime DOB = DateTime.Parse(TextBoxDOB.Text.ToString());
+            DateTime DOB = DateTime.Now;
+            DateTime.TryParse(TextBoxDOB.Text.ToString(), out DOB);
             String gender = DropDownListGender.SelectedValue.ToString();
             String address = TextBoxAddress.Text.ToString();
             String phone = TextBoxPhoneNumber.Text.ToString();
             String email = TextBoxEmail.Text.ToString();
             String password = TextBoxPassword.Text.ToString();
-            Decimal salary = Decimal.Parse(TextBoxSalary.Text.ToString());
+            Decimal salary = 0;
+            Decimal.TryParse(TextBoxSalary.Text.ToString(), out salary);
             String role = DropDownListRole.SelectedValue.ToString();
 
             MsEmployee toUpdateMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);

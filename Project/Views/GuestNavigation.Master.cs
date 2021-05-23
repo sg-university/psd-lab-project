@@ -35,17 +35,17 @@ namespace Project.Views
 
         protected void ButtonRegister_Click(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Response.Redirect("/Views/RegisterPage.aspx");
         }
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Response.Redirect("/Views/LoginPage.aspx");
         }
 
         protected void ButtonForgotPassword_Click(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Response.Redirect("/Views/ForgotPasswordPage.aspx");
         }
     }
 }

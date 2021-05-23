@@ -27,7 +27,7 @@ namespace Project.Handlers
         public MsFlower CreateOne(MsFlower toCreateMsFlower)
         {
             toCreateMsFlower.FlowerID = Guid.NewGuid();
-            toCreateMsFlower.FlowerImage = "~/Assets/Images/" + toCreateMsFlower.FlowerName;
+            //toCreateMsFlower.FlowerImage = "~/Assets/Images/" + Guid.NewGuid().ToString();
             MsFlower result = MsFlowerRepository.CreateOne(toCreateMsFlower);
             return result;
         }

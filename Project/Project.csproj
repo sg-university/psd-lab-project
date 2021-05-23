@@ -93,10 +93,12 @@
     <Content Include="Views\EmployeeHomePage.aspx" />
     <Content Include="Views\ErrorPage.aspx" />
     <Content Include="Views\ForgotPasswordPage.aspx" />
-    <Content Include="Views\InsertFlowerPage.aspx" />
+    <Content Include="Views\ManageFlowerInsertPage.aspx" />
     <Content Include="Views\LoginPage.aspx" />
     <Content Include="Views\LogoutPage.aspx" />
     <Content Include="Views\ManageEmployeeInsertPage.aspx" />
+    <Content Include="Views\ManageFlowerPage.aspx" />
+    <Content Include="Views\ManageFlowerUpdatePage.aspx" />
     <Content Include="Views\ManageMemberInsertPage.aspx" />
     <Content Include="Views\ManageEmployeePage.aspx" />
     <Content Include="Views\ManageMemberPage.aspx" />
@@ -215,12 +217,12 @@
     <Compile Include="Views\GuestNavigation.Master.designer.cs">
       <DependentUpon>GuestNavigation.Master</DependentUpon>
     </Compile>
-    <Compile Include="Views\InsertFlowerPage.aspx.cs">
-      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
+    <Compile Include="Views\ManageFlowerInsertPage.aspx.cs">
+      <DependentUpon>ManageFlowerInsertPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\InsertFlowerPage.aspx.designer.cs">
-      <DependentUpon>InsertFlowerPage.aspx</DependentUpon>
+    <Compile Include="Views\ManageFlowerInsertPage.aspx.designer.cs">
+      <DependentUpon>ManageFlowerInsertPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.aspx.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
@@ -242,6 +244,20 @@
     </Compile>
     <Compile Include="Views\ManageEmployeeInsertPage.aspx.designer.cs">
       <DependentUpon>ManageEmployeeInsertPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManageFlowerPage.aspx.cs">
+      <DependentUpon>ManageFlowerPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ManageFlowerPage.aspx.designer.cs">
+      <DependentUpon>ManageFlowerPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManageFlowerUpdatePage.aspx.cs">
+      <DependentUpon>ManageFlowerUpdatePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ManageFlowerUpdatePage.aspx.designer.cs">
+      <DependentUpon>ManageFlowerUpdatePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageMemberInsertPage.aspx.cs">
       <DependentUpon>ManageMemberInsertPage.aspx</DependentUpon>

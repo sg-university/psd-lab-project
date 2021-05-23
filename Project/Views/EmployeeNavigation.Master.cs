@@ -38,7 +38,7 @@ namespace Project.Views
         }
         protected void ButtonManageFlower_Click(object sender, EventArgs e)
         {
-            HttpContext.Current.Response.Redirect("/Views/ManageFlower.aspx");
+            HttpContext.Current.Response.Redirect("/Views/ManageFlowerPage.aspx");
         }
         
         protected void ButtonLogout_Click(object sender, EventArgs e)
