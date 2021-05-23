@@ -22,7 +22,8 @@ namespace Project.Views
         protected void ButtonInsert_Click(object sender, EventArgs e)
         {
             String name = TextBoxName.Text.ToString();
-            DateTime DOB = DateTime.Parse(TextBoxDOB.Text.ToString());
+            DateTime DOB = DateTime.Now;
+            DateTime.TryParse(TextBoxDOB.Text.ToString(), out DOB);
             String gender = DropDownListGender.SelectedValue.ToString();
             String address = TextBoxAddress.Text.ToString();
             String phone = TextBoxPhoneNumber.Text.ToString();

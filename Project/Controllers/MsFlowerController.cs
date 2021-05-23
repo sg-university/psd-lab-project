@@ -11,9 +11,27 @@ namespace Project.Controllers
     {
         readonly MsFlowerHandler MsFlowerHandler = new MsFlowerHandler();
 
+
+        public Result ReadAll()
+        {
+            Result result = new Result();
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to read all Flower Type";
+            result.Data = MsFlowerHandler.ReadAll();
+            return result;
+        }
+        public Result ReadOneByID(Guid ID)
+        {
+            Result result = new Result();
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to read one Flower Type";
+            result.Data = MsFlowerHandler.ReadOneByID(ID);
+            return result;
+        }
         public Result CreateOne(MsFlower toCreateMsFlower)
         {
             Result result = new Result();
+
             if (String.IsNullOrEmpty(toCreateMsFlower.FlowerName) || toCreateMsFlower.FlowerName.Length < 5)
             {
                 result.ErrorCode = "403";
@@ -38,11 +56,27 @@ namespace Project.Controllers
                 result.ErrorMessage = "Price must be filled and between 20 and 100 inclusively!";
                 return result;
             }
-            //MsFlowerHandler.AddNewFlower(name, description, type, int.Parse(price));
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Flower";
             result.Data = MsFlowerHandler.CreateOne(toCreateMsFlower);
+
+            return result;
+        }
+        public Result UpdateOneByID(Guid ID, MsFlower toUpdateMsFlower)
+        {
+            Result result = new Result();
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to update one Flower Type";
+            result.Data = MsFlowerHandler.UpdateOneByID(ID, toUpdateMsFlower);
+            return result;
+        }
+        public Result DeleteOneByID(Guid ID)
+        {
+            Result result = new Result();
+            result.SuccessCode = "200";
+            result.SucessMessage = "Succeed to delete one Flower Type";
+            result.Data = MsFlowerHandler.DeleteOneByID(ID);
             return result;
         }
     }
