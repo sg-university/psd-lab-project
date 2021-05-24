@@ -122,7 +122,7 @@
     <Compile Include="Factories\MsMemberFactory.cs" />
     <Compile Include="Factories\MsEmployeeFactory.cs" />
     <Compile Include="Handlers\MsFlowerHandler.cs" />
-    <Compile Include="Handlers\MsMemberAuthenticationHandler - Copy.cs" />
+    <Compile Include="Handlers\MsMemberAuthenticationHandler.cs" />
     <Compile Include="Handlers\MsEmployeeAuthenticationHandler.cs" />
     <Compile Include="Handlers\MsEmployeeHandler.cs" />
     <Compile Include="Handlers\MsFlowerTypeHandler.cs" />
