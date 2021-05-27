@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.Factory;
+using Project.Models;
 using Project.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Project.Handlers
     public class MsFlowerTypeHandler
     {
         readonly MsFlowerTypeRepository MsFlowerTypeRepository = new MsFlowerTypeRepository();
-
+        readonly MsFlowerTypeFactory MsFlowerTypeFactory = new MsFlowerTypeFactory();
         public List<MsFlowerType> ReadAll()
         {
             List<MsFlowerType> result = MsFlowerTypeRepository.ReadAll();

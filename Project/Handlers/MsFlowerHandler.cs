@@ -11,7 +11,6 @@ namespace Project.Handlers
     public class MsFlowerHandler
     {
         readonly MsFlowerRepository MsFlowerRepository = new MsFlowerRepository();
-        readonly MsFlowerTypeRepository MsFlowerTypeRepository = new MsFlowerTypeRepository();
         readonly MsFlowerFactory MsFlowerFactory = new MsFlowerFactory();
 
         public List<MsFlower> ReadAll()

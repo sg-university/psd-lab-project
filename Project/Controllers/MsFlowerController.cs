@@ -10,8 +10,6 @@ namespace Project.Controllers
     public class MsFlowerController
     {
         readonly MsFlowerHandler MsFlowerHandler = new MsFlowerHandler();
-
-
         public Result ReadAll()
         {
             Result result = new Result();

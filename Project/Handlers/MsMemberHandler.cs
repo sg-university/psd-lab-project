@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.Factory;
+using Project.Models;
 using Project.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Project.Handlers
     public class MsMemberHandler
     {
         readonly MsMemberRepository MsMemberRepository = new MsMemberRepository();
+        readonly MsMemberFactory MsMemberFactory = new MsMemberFactory();
 
         public List<MsMember> ReadAll()
         {
