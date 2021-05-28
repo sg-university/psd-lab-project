@@ -20,7 +20,10 @@ namespace Project.Handlers
         {
             TrHeader currentTrHeader = TrHeaderHandler.CreateOne(toCreateTrHeader);
             List<TrDetail> currentTrDetail = toCreateTrDetail.Select(x =>
-            TrDetailHandler.CreateOne(x)).ToList();
+            {
+                x.TransactionID = currentTrHeader.TransactionID;
+                return TrDetailHandler.CreateOne(x);
+            }).ToList();
 
             return currentTrHeader;
         }
