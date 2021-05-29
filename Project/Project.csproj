@@ -105,6 +105,7 @@
     <Content Include="Views\ManageEmployeeUpdatePage.aspx" />
     <Content Include="Views\ManageMemberUpdatePage.aspx" />
     <Content Include="Views\MemberHomePage.aspx" />
+    <Content Include="Views\PreOrderPage.aspx" />
     <Content Include="Views\RegisterPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -313,6 +314,13 @@
     </Compile>
     <Compile Include="Views\MemberNavigation.Master.designer.cs">
       <DependentUpon>MemberNavigation.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PreOrderPage.aspx.cs">
+      <DependentUpon>PreOrderPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\PreOrderPage.aspx.designer.cs">
+      <DependentUpon>PreOrderPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterPage.aspx.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>

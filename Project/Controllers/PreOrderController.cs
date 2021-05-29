@@ -20,7 +20,39 @@ namespace Project.Controllers
         {
             Result result = new Result();
 
-            MsEmployee currentMsEmployee = MsEmployeeHandler.ReadOneByID(toCreateTrHeader.MsEmployee.EmployeeID);
+            Boolean isDateValid = toCreateTrHeader.TransactionDate.GetValueOrDefault() != null;
+            if (!isDateValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Transaction Date must be valid";
+                return result;
+            }
+
+            Boolean isDateRangeValid = toCreateTrHeader.TransactionDate.GetValueOrDefault().Year >= 1753;
+            if (!isDateRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Transaction Date must be in valid range";
+                return result;
+            }
+
+            Boolean isDiscountPercentageValid = toCreateTrHeader.DiscountPercentage.GetValueOrDefault() != null;
+            if (!isDiscountPercentageValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Discount Percentage must be valid";
+                return result;
+            }
+
+            Boolean isDiscountPercentageRangeValid = toCreateTrHeader.DiscountPercentage.GetValueOrDefault() > 0;
+            if (!isDiscountPercentageRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Discount Percentage must be in valid range";
+                return result;
+            }
+
+            MsEmployee currentMsEmployee = MsEmployeeHandler.ReadOneByID(toCreateTrHeader.EmployeeID.GetValueOrDefault());
             Boolean isEmployeeFound = currentMsEmployee != null;
             if (!isEmployeeFound)
             {
@@ -29,15 +61,33 @@ namespace Project.Controllers
                 return result;
             }
 
-            List<MsFlower> currentMsFlower = toCreateTrDetail.Select(x => MsFlowerHandler.ReadOneByID(x.MsFlower.FlowerID)).ToList();
-            Boolean isFlowerFound = !currentMsFlower.Exists(x => x == null);
-
-            if (!isFlowerFound) {
+            Boolean isAllFlowerCountValid = toCreateTrDetail.Count > 1;
+            if (!isAllFlowerCountValid)
+            {
                 result.ErrorCode = "403";
-                result.ErrorMessage = "Flower must be exists in database";
+                result.ErrorMessage = "Flower selected must be atleast 1";
                 return result;
             }
-            
+
+
+            Boolean isQuantityValid = !toCreateTrDetail.Select(x => (1 >= x.Quantity) && (x.Quantity <= 100)).ToList().Exists(x => false); ;
+            if (!isQuantityValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Flower selected quantity must be between 1 to 100 inclusively";
+                return result;
+            }
+
+            List<MsFlower> currentMsFlower = toCreateTrDetail.Select(x => MsFlowerHandler.ReadOneByID(x.FlowerID.GetValueOrDefault())).ToList();
+            Boolean isAllFlowerFound = !currentMsFlower.Exists(x => x == null);
+
+            if (!isAllFlowerFound)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Flower selected must be exists in database";
+                return result;
+            }
+
             TrHeader currentTrHeader = TrHeaderHandler.CreateOne(toCreateTrHeader);
 
             List<TrDetail> currentTrDetail = toCreateTrDetail.Select(x =>

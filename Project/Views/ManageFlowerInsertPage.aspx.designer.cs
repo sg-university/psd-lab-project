@@ -15,13 +15,13 @@ namespace Project.Views
     {
 
         /// <summary>
-        /// Label1 control.
+        /// LabelName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LabelName;
 
         /// <summary>
         /// TextBoxName control.
@@ -33,13 +33,22 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.TextBox TextBoxName;
 
         /// <summary>
-        /// Label3 control.
+        /// LabelMessageName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label LabelMessageName;
+
+        /// <summary>
+        /// LabelType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelType;
 
         /// <summary>
         /// DropDownListType control.
@@ -51,13 +60,22 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.DropDownList DropDownListType;
 
         /// <summary>
-        /// Label2 control.
+        /// LabelMessageType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label LabelMessageType;
+
+        /// <summary>
+        /// LabelDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDescription;
 
         /// <summary>
         /// TextBoxDescription control.
@@ -69,13 +87,22 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
 
         /// <summary>
-        /// Label4 control.
+        /// LabelMessageDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label LabelMessageDescription;
+
+        /// <summary>
+        /// LabelPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPrice;
 
         /// <summary>
         /// TextBoxPrice control.
@@ -87,13 +114,22 @@ namespace Project.Views
         protected global::System.Web.UI.WebControls.TextBox TextBoxPrice;
 
         /// <summary>
-        /// Label5 control.
+        /// LabelMessagePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label LabelMessagePrice;
+
+        /// <summary>
+        /// LabelImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelImage;
 
         /// <summary>
         /// FileUploadImage control.
@@ -103,6 +139,15 @@ namespace Project.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
+
+        /// <summary>
+        /// LabelMessageImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessageImage;
 
         /// <summary>
         /// LabelMessageStatus control.

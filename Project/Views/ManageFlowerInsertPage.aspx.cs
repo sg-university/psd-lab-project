@@ -52,6 +52,12 @@ namespace Project.Views
 
             MsFlower toCreateMsFlower = MsFlowerFactory.Create(name, typeID, description, price, toSaveImage);
 
+            if (String.IsNullOrEmpty(FileUploadImage.FileName))
+            {
+                LabelMessageStatus.Text = "Image must be filled";
+                return;
+            }
+
             Result result = MsFlowerController.CreateOne(toCreateMsFlower);
 
             if (result.SuccessCode != null)
@@ -61,11 +67,6 @@ namespace Project.Views
             if (result.ErrorCode != null)
             {
                 LabelMessageStatus.Text = result.ErrorMessage.ToString();
-                return;
-            }
-            if (String.IsNullOrEmpty(FileUploadImage.FileName))
-            {
-                LabelMessageStatus.Text = "Image must be filled";
                 return;
             }
 
