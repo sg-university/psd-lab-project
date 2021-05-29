@@ -25,11 +25,11 @@ namespace Project.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<MsEmployee> MsEmployees { get; set; }
         public virtual DbSet<MsFlower> MsFlowers { get; set; }
         public virtual DbSet<MsFlowerType> MsFlowerTypes { get; set; }
         public virtual DbSet<MsMember> MsMembers { get; set; }
-        public virtual DbSet<TrHeader> TrHeaders { get; set; }
         public virtual DbSet<TrDetail> TrDetails { get; set; }
-        public virtual DbSet<MsEmployee> MsEmployees { get; set; }
+        public virtual DbSet<TrHeader> TrHeaders { get; set; }
     }
 }

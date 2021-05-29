@@ -6,7 +6,7 @@
     </Key>
     <Property Name="EmployeeID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="EmployeeName" Type="varchar(max)" />
-    <Property Name="EmployeeDOB" Type="date" />
+    <Property Name="EmployeeDOB" Type="datetime" />
     <Property Name="EmployeeGender" Type="varchar(max)" />
     <Property Name="EmployeeAddress" Type="varchar(max)" />
     <Property Name="EmployeePhone" Type="varchar(max)" />

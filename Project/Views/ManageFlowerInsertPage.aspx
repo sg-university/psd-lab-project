@@ -13,22 +13,26 @@
         <h1>Manage Flower Insert Page</h1>
     </div>
     <div>
-        <asp:Label ID="Label1" runat="server" Text="Name"></asp:Label>
+        <asp:Label ID="LabelName" runat="server" Text="Name"></asp:Label>
         <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
+        <asp:Label ID="LabelMessageName" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label ID="Label3" runat="server" Text="Type"></asp:Label>
+        <asp:Label ID="LabelType" runat="server" Text="Type"></asp:Label>
         <asp:DropDownList ID="DropDownListType" runat="server">
         </asp:DropDownList>
+        <asp:Label ID="LabelMessageType" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Description:"></asp:Label>
-        <br />
+        <asp:Label ID="LabelDescription" runat="server" Text="Description"></asp:Label>
         <asp:TextBox ID="TextBoxDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
+        <asp:Label ID="LabelMessageDescription" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label ID="Label4" runat="server" Text="Price"></asp:Label>
+        <asp:Label ID="LabelPrice" runat="server" Text="Price"></asp:Label>
         <asp:TextBox ID="TextBoxPrice" runat="server" TextMode="Number"></asp:TextBox>
+        <asp:Label ID="LabelMessagePrice" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label ID="Label5" runat="server" Text="Upload picture"></asp:Label>
+        <asp:Label ID="LabelImage" runat="server" Text="Upload image"></asp:Label>
         <asp:FileUpload ID="FileUploadImage" runat="server" />
+        <asp:Label ID="LabelMessageImage" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="LabelMessageStatus" runat="server" Text=""></asp:Label>
         <br />

@@ -11,7 +11,7 @@
           </Key>
           <Property Name="EmployeeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EmployeeName" Type="varchar(max)" />
-          <Property Name="EmployeeDOB" Type="date" />
+          <Property Name="EmployeeDOB" Type="datetime" />
           <Property Name="EmployeeGender" Type="varchar(max)" />
           <Property Name="EmployeeAddress" Type="varchar(max)" />
           <Property Name="EmployeePhone" Type="varchar(max)" />
@@ -162,6 +162,50 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NeinteenFlowerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NeinteenFlowerDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MsEmployees" EntityType="NeinteenFlowerDBModel.MsEmployee" />
+          <EntitySet Name="MsFlowers" EntityType="NeinteenFlowerDBModel.MsFlower" />
+          <EntitySet Name="MsFlowerTypes" EntityType="NeinteenFlowerDBModel.MsFlowerType" />
+          <EntitySet Name="MsMembers" EntityType="NeinteenFlowerDBModel.MsMember" />
+          <EntitySet Name="TrDetails" EntityType="NeinteenFlowerDBModel.TrDetail" />
+          <EntitySet Name="TrHeaders" EntityType="NeinteenFlowerDBModel.TrHeader" />
+          <AssociationSet Name="FK_TrHeader_MsEmployee_EmployeeID" Association="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID">
+            <End Role="MsEmployee" EntitySet="MsEmployees" />
+            <End Role="TrHeader" EntitySet="TrHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MsFlower_MsFlowerType_FlowerTypeID" Association="NeinteenFlowerDBModel.FK_MsFlower_MsFlowerType_FlowerTypeID">
+            <End Role="MsFlowerType" EntitySet="MsFlowerTypes" />
+            <End Role="MsFlower" EntitySet="MsFlowers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrDetail_MsFlower_FlowerID" Association="NeinteenFlowerDBModel.FK_TrDetail_MsFlower_FlowerID">
+            <End Role="MsFlower" EntitySet="MsFlowers" />
+            <End Role="TrDetail" EntitySet="TrDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrHeader_MsMember_MemberID" Association="NeinteenFlowerDBModel.FK_TrHeader_MsMember_MemberID">
+            <End Role="MsMember" EntitySet="MsMembers" />
+            <End Role="TrHeader" EntitySet="TrHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrDetail_TrHeader_TransactionID" Association="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID">
+            <End Role="TrHeader" EntitySet="TrHeaders" />
+            <End Role="TrDetail" EntitySet="TrDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MsEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeDOB" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeGender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TrHeaders" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="MsEmployee" ToRole="TrHeader" />
+        </EntityType>
         <EntityType Name="MsFlower">
           <Key>
             <PropertyRef Name="FlowerID" />
@@ -172,7 +216,7 @@
           <Property Name="FlowerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FlowerPrice" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="FlowerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="MsFlowerType" Relationship="Self.FK_MsFlower_MsFlowerType_FlowerTypeID" FromRole="MsFlower" ToRole="MsFlowerType" />
+          <NavigationProperty Name="MsFlowerType" Relationship="NeinteenFlowerDBModel.FK_MsFlower_MsFlowerType_FlowerTypeID" FromRole="MsFlower" ToRole="MsFlowerType" />
           <NavigationProperty Name="TrDetails" Relationship="NeinteenFlowerDBModel.FK_TrDetail_MsFlower_FlowerID" FromRole="MsFlower" ToRole="TrDetail" />
         </EntityType>
         <EntityType Name="MsFlowerType">
@@ -181,7 +225,7 @@
           </Key>
           <Property Name="FlowerTypeID" Type="Guid" Nullable="false" />
           <Property Name="FlowerTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="MsFlowers" Relationship="Self.FK_MsFlower_MsFlowerType_FlowerTypeID" FromRole="MsFlowerType" ToRole="MsFlower" />
+          <NavigationProperty Name="MsFlowers" Relationship="NeinteenFlowerDBModel.FK_MsFlower_MsFlowerType_FlowerTypeID" FromRole="MsFlowerType" ToRole="MsFlower" />
         </EntityType>
         <EntityType Name="MsMember">
           <Key>
@@ -195,73 +239,8 @@
           <Property Name="MemberPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MemberEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MemberPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TrHeaders" Relationship="Self.FK_TrHeader_MsMember_MemberID" FromRole="MsMember" ToRole="TrHeader" />
+          <NavigationProperty Name="TrHeaders" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsMember_MemberID" FromRole="MsMember" ToRole="TrHeader" />
         </EntityType>
-        <EntityType Name="TrHeader">
-          <Key>
-            <PropertyRef Name="TransactionID" />
-          </Key>
-          <Property Name="TransactionID" Type="Guid" Nullable="false" />
-          <Property Name="MemberID" Type="Guid" />
-          <Property Name="EmployeeID" Type="Guid" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
-          <Property Name="DiscountPercentage" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="MsMember" Relationship="Self.FK_TrHeader_MsMember_MemberID" FromRole="TrHeader" ToRole="MsMember" />
-          <NavigationProperty Name="TrDetails" Relationship="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID" FromRole="TrHeader" ToRole="TrDetail" />
-          <NavigationProperty Name="MsEmployee" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="TrHeader" ToRole="MsEmployee" />
-        </EntityType>
-        <Association Name="FK_MsFlower_MsFlowerType_FlowerTypeID">
-          <End Role="MsFlowerType" Type="Self.MsFlowerType" Multiplicity="0..1" />
-          <End Role="MsFlower" Type="Self.MsFlower" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MsFlowerType">
-              <PropertyRef Name="FlowerTypeID" />
-            </Principal>
-            <Dependent Role="MsFlower">
-              <PropertyRef Name="FlowerTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TrHeader_MsMember_MemberID">
-          <End Role="MsMember" Type="Self.MsMember" Multiplicity="0..1" />
-          <End Role="TrHeader" Type="Self.TrHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MsMember">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="TrHeader">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="NeinteenFlowerDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="MsFlowers" EntityType="Self.MsFlower" />
-          <EntitySet Name="MsFlowerTypes" EntityType="Self.MsFlowerType" />
-          <EntitySet Name="MsMembers" EntityType="Self.MsMember" />
-          <EntitySet Name="TrHeaders" EntityType="Self.TrHeader" />
-          <AssociationSet Name="FK_MsFlower_MsFlowerType_FlowerTypeID" Association="Self.FK_MsFlower_MsFlowerType_FlowerTypeID">
-            <End Role="MsFlowerType" EntitySet="MsFlowerTypes" />
-            <End Role="MsFlower" EntitySet="MsFlowers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TrHeader_MsMember_MemberID" Association="Self.FK_TrHeader_MsMember_MemberID">
-            <End Role="MsMember" EntitySet="MsMembers" />
-            <End Role="TrHeader" EntitySet="TrHeaders" />
-          </AssociationSet>
-          <EntitySet Name="TrDetails" EntityType="NeinteenFlowerDBModel.TrDetail" />
-          <AssociationSet Name="FK_TrDetail_MsFlower_FlowerID" Association="NeinteenFlowerDBModel.FK_TrDetail_MsFlower_FlowerID">
-            <End Role="MsFlower" EntitySet="MsFlowers" />
-            <End Role="TrDetail" EntitySet="TrDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TrDetail_TrHeader_TransactionID" Association="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID">
-            <End Role="TrHeader" EntitySet="TrHeaders" />
-            <End Role="TrDetail" EntitySet="TrDetails" />
-          </AssociationSet>
-          <EntitySet Name="MsEmployees" EntityType="NeinteenFlowerDBModel.MsEmployee" />
-          <AssociationSet Name="FK_TrHeader_MsEmployee_EmployeeID" Association="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID">
-            <End Role="MsEmployee" EntitySet="MsEmployees" />
-            <End Role="TrHeader" EntitySet="TrHeaders" />
-          </AssociationSet>
-          </EntityContainer>
         <EntityType Name="TrDetail">
           <Key>
             <PropertyRef Name="DetailID" />
@@ -273,6 +252,43 @@
           <NavigationProperty Name="MsFlower" Relationship="NeinteenFlowerDBModel.FK_TrDetail_MsFlower_FlowerID" FromRole="TrDetail" ToRole="MsFlower" />
           <NavigationProperty Name="TrHeader" Relationship="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID" FromRole="TrDetail" ToRole="TrHeader" />
         </EntityType>
+        <EntityType Name="TrHeader">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Guid" Nullable="false" />
+          <Property Name="MemberID" Type="Guid" />
+          <Property Name="EmployeeID" Type="Guid" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="DiscountPercentage" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="MsEmployee" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="TrHeader" ToRole="MsEmployee" />
+          <NavigationProperty Name="MsMember" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsMember_MemberID" FromRole="TrHeader" ToRole="MsMember" />
+          <NavigationProperty Name="TrDetails" Relationship="NeinteenFlowerDBModel.FK_TrDetail_TrHeader_TransactionID" FromRole="TrHeader" ToRole="TrDetail" />
+        </EntityType>
+        <Association Name="FK_TrHeader_MsEmployee_EmployeeID">
+          <End Type="NeinteenFlowerDBModel.MsEmployee" Role="MsEmployee" Multiplicity="0..1" />
+          <End Type="NeinteenFlowerDBModel.TrHeader" Role="TrHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsEmployee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TrHeader">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MsFlower_MsFlowerType_FlowerTypeID">
+          <End Type="NeinteenFlowerDBModel.MsFlowerType" Role="MsFlowerType" Multiplicity="0..1" />
+          <End Type="NeinteenFlowerDBModel.MsFlower" Role="MsFlower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsFlowerType">
+              <PropertyRef Name="FlowerTypeID" />
+            </Principal>
+            <Dependent Role="MsFlower">
+              <PropertyRef Name="FlowerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TrDetail_MsFlower_FlowerID">
           <End Type="NeinteenFlowerDBModel.MsFlower" Role="MsFlower" Multiplicity="0..1" />
           <End Type="NeinteenFlowerDBModel.TrDetail" Role="TrDetail" Multiplicity="*" />
@@ -282,6 +298,18 @@
             </Principal>
             <Dependent Role="TrDetail">
               <PropertyRef Name="FlowerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrHeader_MsMember_MemberID">
+          <End Type="NeinteenFlowerDBModel.MsMember" Role="MsMember" Multiplicity="0..1" />
+          <End Type="NeinteenFlowerDBModel.TrHeader" Role="TrHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MsMember">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="TrHeader">
+              <PropertyRef Name="MemberID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -297,95 +325,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="MsEmployee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Guid" Nullable="false" />
-          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeDOB" Type="DateTime" Precision="0" />
-          <Property Name="EmployeeGender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeSalary" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="EmployeePassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TrHeaders" Relationship="NeinteenFlowerDBModel.FK_TrHeader_MsEmployee_EmployeeID" FromRole="MsEmployee" ToRole="TrHeader" />
-        </EntityType>
-        <Association Name="FK_TrHeader_MsEmployee_EmployeeID">
-          <End Type="NeinteenFlowerDBModel.MsEmployee" Role="MsEmployee" Multiplicity="0..1" />
-          <End Type="NeinteenFlowerDBModel.TrHeader" Role="TrHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MsEmployee">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="TrHeader">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NeinteenFlowerDBModelStoreContainer" CdmEntityContainer="NeinteenFlowerDBEntities">
-          <EntitySetMapping Name="MsFlowers">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlower">
-              <MappingFragment StoreEntitySet="MsFlower">
-                <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
-                <ScalarProperty Name="FlowerName" ColumnName="FlowerName" />
-                <ScalarProperty Name="FlowerTypeID" ColumnName="FlowerTypeID" />
-                <ScalarProperty Name="FlowerDescription" ColumnName="FlowerDescription" />
-                <ScalarProperty Name="FlowerPrice" ColumnName="FlowerPrice" />
-                <ScalarProperty Name="FlowerImage" ColumnName="FlowerImage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MsFlowerTypes">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlowerType">
-              <MappingFragment StoreEntitySet="MsFlowerType">
-                <ScalarProperty Name="FlowerTypeID" ColumnName="FlowerTypeID" />
-                <ScalarProperty Name="FlowerTypeName" ColumnName="FlowerTypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MsMembers">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsMember">
-              <MappingFragment StoreEntitySet="MsMember">
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
-                <ScalarProperty Name="MemberDOB" ColumnName="MemberDOB" />
-                <ScalarProperty Name="MemberGender" ColumnName="MemberGender" />
-                <ScalarProperty Name="MemberAddress" ColumnName="MemberAddress" />
-                <ScalarProperty Name="MemberPhone" ColumnName="MemberPhone" />
-                <ScalarProperty Name="MemberEmail" ColumnName="MemberEmail" />
-                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TrHeaders">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.TrHeader">
-              <MappingFragment StoreEntitySet="TrHeader">
-                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TrDetails">
-            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.TrDetail">
-              <MappingFragment StoreEntitySet="TrDetail">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
-                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
-                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MsEmployees">
             <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsEmployee">
               <MappingFragment StoreEntitySet="MsEmployee">
@@ -399,6 +344,61 @@
                 <ScalarProperty Name="EmployeeDOB" ColumnName="EmployeeDOB" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsFlowers">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlower">
+              <MappingFragment StoreEntitySet="MsFlower">
+                <ScalarProperty Name="FlowerImage" ColumnName="FlowerImage" />
+                <ScalarProperty Name="FlowerPrice" ColumnName="FlowerPrice" />
+                <ScalarProperty Name="FlowerDescription" ColumnName="FlowerDescription" />
+                <ScalarProperty Name="FlowerTypeID" ColumnName="FlowerTypeID" />
+                <ScalarProperty Name="FlowerName" ColumnName="FlowerName" />
+                <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsFlowerTypes">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsFlowerType">
+              <MappingFragment StoreEntitySet="MsFlowerType">
+                <ScalarProperty Name="FlowerTypeName" ColumnName="FlowerTypeName" />
+                <ScalarProperty Name="FlowerTypeID" ColumnName="FlowerTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MsMembers">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.MsMember">
+              <MappingFragment StoreEntitySet="MsMember">
+                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
+                <ScalarProperty Name="MemberEmail" ColumnName="MemberEmail" />
+                <ScalarProperty Name="MemberPhone" ColumnName="MemberPhone" />
+                <ScalarProperty Name="MemberAddress" ColumnName="MemberAddress" />
+                <ScalarProperty Name="MemberGender" ColumnName="MemberGender" />
+                <ScalarProperty Name="MemberDOB" ColumnName="MemberDOB" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrDetails">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.TrDetail">
+              <MappingFragment StoreEntitySet="TrDetail">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="FlowerID" ColumnName="FlowerID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrHeaders">
+            <EntityTypeMapping TypeName="NeinteenFlowerDBModel.TrHeader">
+              <MappingFragment StoreEntitySet="TrHeader">
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

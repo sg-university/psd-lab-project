@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS MsFlower;
 CREATE TABLE MsUser
 (UserID       UNIQUEIDENTIFIER primary key, 
  UserName     VARCHAR(MAX), 
- UserDOB      DATE, 
+ UserDOB      DATETIME, 
  UserGender   VARCHAR(MAX), 
  UserAddress  VARCHAR(MAX), 
  UserPhone    VARCHAR(MAX), 
@@ -35,7 +35,7 @@ CREATE TABLE MsMember
 CREATE TABLE MsEmployee
 (EmployeeID       UNIQUEIDENTIFIER, 
  EmployeeName     VARCHAR(MAX), 
- EmployeeDOB      DATE, 
+ EmployeeDOB      DATETIME, 
  EmployeeGender   VARCHAR(MAX), 
  EmployeeAddress  VARCHAR(MAX), 
  EmployeePhone    VARCHAR(MAX), 
