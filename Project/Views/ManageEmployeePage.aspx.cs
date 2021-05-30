@@ -40,7 +40,7 @@ namespace Project.Views
                 case "Update":
                     HttpContext.Current.Response.Redirect("/Views/ManageEmployeeUpdatePage.aspx?ID=" + ID);
                     break;
-                case "Delete":
+                case "Remove":
                     try
                     {
                         Result result = MsEmployeeController.DeleteOneByID(ID);
@@ -48,7 +48,7 @@ namespace Project.Views
                     }
                     catch
                     {
-                        // HttpContext.Current.Response.Redirect("/Views/ErrorPage.aspx");
+                        HttpContext.Current.Response.Redirect("/Views/ErrorPage.aspx");
                     }
                     break;
                 default:

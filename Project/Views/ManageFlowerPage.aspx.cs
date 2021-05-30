@@ -41,7 +41,7 @@ namespace Project.Views
                 case "Update":
                     HttpContext.Current.Response.Redirect("/Views/ManageFlowerUpdatePage.aspx?ID=" + ID);
                     break;
-                case "Delete":
+                case "Remove":
                     try
                     {
                         Result result = MsFlowerController.DeleteOneByID(ID);
