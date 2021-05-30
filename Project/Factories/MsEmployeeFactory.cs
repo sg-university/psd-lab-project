@@ -31,7 +31,7 @@ namespace Project.Factory
         {
             MsEmployee createdMsEmployee = new MsEmployee
             {
-                EmployeeID = Guid.NewGuid(),
+                EmployeeID = Guid.Empty,
                 EmployeeName = name,
                 EmployeeDOB = DOB,
                 EmployeeGender = gender,

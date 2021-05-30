@@ -3,6 +3,7 @@ using Project.Factory;
 using Project.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,20 +13,18 @@ namespace Project.Views
 {
     public partial class PreOrderPage : System.Web.UI.Page
     {
-        PreOrderController PreOrderController = new PreOrderController();
-        TrHeaderController TrHeaderController = new TrHeaderController();
-        MsFlowerController MsFlowerController = new MsFlowerController();
-        MsMemberController MsMemberController = new MsMemberController();
-        MsEmployeeController MsEmployeeController = new MsEmployeeController();
+        readonly PreOrderController PreOrderController = new PreOrderController();
+        readonly TrHeaderController TrHeaderController = new TrHeaderController();
+        readonly MsFlowerController MsFlowerController = new MsFlowerController();
+        readonly MsMemberController MsMemberController = new MsMemberController();
+        readonly MsEmployeeController MsEmployeeController = new MsEmployeeController();
 
-        TrHeaderFactory TrHeaderFactory = new TrHeaderFactory();
-        TrDetailFactory TrDetailFactory = new TrDetailFactory();
-
-        List<TrDetail> ToCreateTrDetail = new List<TrDetail>();
+        readonly TrHeaderFactory TrHeaderFactory = new TrHeaderFactory();
+        readonly TrDetailFactory TrDetailFactory = new TrDetailFactory();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (!IsPostBack)
             {
                 try
                 {
@@ -33,8 +32,10 @@ namespace Project.Views
                     GridViewFlowerSelection.DataSource = (List<MsFlower>)resultAllFlower.Data;
                     GridViewFlowerSelection.DataBind();
 
-                    GridViewTransactionDetail.DataSource = ToCreateTrDetail;
+                    List<TrDetail> toCreateTrDetail = new List<TrDetail>();
+                    GridViewTransactionDetail.DataSource = toCreateTrDetail;
                     GridViewTransactionDetail.DataBind();
+                    HttpContext.Current.Session["ToCreateTrDetail"] = toCreateTrDetail;
 
                     Result resultAllMember = MsMemberController.ReadAll();
                     List<MsMember> allMember = (List<MsMember>)resultAllMember.Data;
@@ -65,24 +66,26 @@ namespace Project.Views
 
             Decimal quantity = 0;
             Decimal.TryParse(TextBoxQuantity.Text.ToString(), out quantity);
+            List<TrDetail> toCreateTrDetail = (List<TrDetail>)HttpContext.Current.Session["ToCreateTrDetail"];
 
             switch (e.CommandName)
             {
                 case "Add":
                     try
                     {
-                        TrDetail currentTrDetail = ToCreateTrDetail.Where(x => x.FlowerID.Equals(flowerID)).FirstOrDefault();
+                        TrDetail currentTrDetail = TrDetailFactory.Create(Guid.Empty, flowerID, quantity);
+                        toCreateTrDetail.Add(currentTrDetail);
 
-                        if (currentTrDetail != null)
-                        {
-                            currentTrDetail.Quantity += quantity;
-                        }
-                        else
-                        {
-                            currentTrDetail = TrDetailFactory.Create(Guid.Empty, flowerID, quantity); ToCreateTrDetail.Add(currentTrDetail);
-                        }
-                        GridViewTransactionDetail.DataSource = null;
-                        GridViewTransactionDetail.DataSource = ToCreateTrDetail;
+                        toCreateTrDetail = toCreateTrDetail
+                         .GroupBy(x => x.FlowerID)
+                         .Select(x => new TrDetail()
+                         {
+                             DetailID = x.First().DetailID,
+                             FlowerID = x.First().FlowerID.GetValueOrDefault(),
+                             Quantity = x.Sum(y => y.Quantity.GetValueOrDefault())
+                         }).ToList();
+
+                        GridViewTransactionDetail.DataSource = toCreateTrDetail;
                         GridViewTransactionDetail.DataBind();
                     }
                     catch
@@ -101,16 +104,16 @@ namespace Project.Views
             int index = int.Parse(e.CommandArgument.ToString());
             GridViewRow row = GridViewFlowerSelection.Rows[index];
             Guid flowerID = Guid.Parse(row.Cells[1].Text.ToString());
+            List<TrDetail> toCreateTrDetail = (List<TrDetail>)HttpContext.Current.Session["ToCreateTrDetail"];
 
             switch (e.CommandName)
             {
                 case "Remove":
                     try
                     {
-                        TrDetail currentTrDetail = ToCreateTrDetail.Where(x => x.FlowerID.Equals(flowerID)).FirstOrDefault();
-                        ToCreateTrDetail.Remove(currentTrDetail);
-                        GridViewTransactionDetail.DataSource = null;
-                        GridViewTransactionDetail.DataSource = ToCreateTrDetail;
+                        TrDetail currentTrDetail = toCreateTrDetail.Where(x => x.FlowerID.Equals(flowerID)).FirstOrDefault();
+                        toCreateTrDetail.Remove(currentTrDetail);
+                        GridViewTransactionDetail.DataSource = toCreateTrDetail;
                         GridViewTransactionDetail.DataBind();
                     }
                     catch
@@ -136,7 +139,9 @@ namespace Project.Views
 
             TrHeader toCreateTrHeader = TrHeaderFactory.Create(memberID, employeeID, transactionDate, discountPercentage);
 
-            Result result = PreOrderController.CreateOne(toCreateTrHeader, ToCreateTrDetail);
+            List<TrDetail> toCreateTrDetail = (List<TrDetail>)HttpContext.Current.Session["ToCreateTrDetail"];
+
+            Result result = PreOrderController.CreateOne(toCreateTrHeader, toCreateTrDetail);
             if (result.SuccessCode != null)
             {
                 LabelMessageStatus.Text = result.SucessMessage.ToString();

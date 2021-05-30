@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.Factory;
+using Project.Models;
 using Project.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ namespace Project.Handlers
     public class MsMemberAuthenticationHandler
     {
         readonly MsMemberHandler MsMemberHandler = new MsMemberHandler();
+        readonly MsMemberFactory MsMemberFactory = new MsMemberFactory();
+
         public MsMember Register(MsMember toRegisterMsMember)
         {
-            MsMember registeredMsMember = MsMemberHandler.CreateOne(toRegisterMsMember);
+            MsMember currentMsMember = MsMemberFactory.Create(toRegisterMsMember.MemberName, toRegisterMsMember.MemberDOB.GetValueOrDefault(), toRegisterMsMember.MemberGender, toRegisterMsMember.MemberAddress, toRegisterMsMember.MemberPhone, toRegisterMsMember.MemberEmail, toRegisterMsMember.MemberPassword);
+
+            MsMember registeredMsMember = MsMemberHandler.CreateOne(currentMsMember);
 
             return registeredMsMember;
         }

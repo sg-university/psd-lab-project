@@ -25,13 +25,18 @@ namespace Project.Handlers
         }
         public TrDetail CreateOne(TrDetail toCreateTrDetail)
         {
-            toCreateTrDetail.TransactionID = Guid.NewGuid();
-            TrDetail result = TrDetailRepository.CreateOne(toCreateTrDetail);
+            TrDetail currentTrDetail = TrDetailFactory.Create(Guid.NewGuid(), toCreateTrDetail.TransactionID.GetValueOrDefault(), toCreateTrDetail.FlowerID.GetValueOrDefault(), toCreateTrDetail.Quantity.GetValueOrDefault());
+
+            TrDetail result = TrDetailRepository.CreateOne(currentTrDetail);
+
             return result;
         }
         public TrDetail UpdateOneByID(Guid ID, TrDetail toUpdateTrDetail)
         {
-            TrDetail result = TrDetailRepository.UpdateOneByID(ID, toUpdateTrDetail);
+            TrDetail currentTrDetail = TrDetailFactory.Create(toUpdateTrDetail.TransactionID.GetValueOrDefault(), toUpdateTrDetail.FlowerID.GetValueOrDefault(), toUpdateTrDetail.Quantity.GetValueOrDefault());
+
+            TrDetail result = TrDetailRepository.UpdateOneByID(ID, currentTrDetail);
+
             return result;
         }
         public TrDetail DeleteOneByID(Guid ID)

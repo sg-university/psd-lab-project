@@ -25,13 +25,17 @@ namespace Project.Handlers
         }
         public MsMember CreateOne(MsMember toCreateMsMember)
         {
-            toCreateMsMember.MemberID = Guid.NewGuid();
-            MsMember result = MsMemberRepository.CreateOne(toCreateMsMember);
+            MsMember currentMsMember = MsMemberFactory.Create(Guid.NewGuid(), toCreateMsMember.MemberName, toCreateMsMember.MemberDOB.GetValueOrDefault(), toCreateMsMember.MemberGender, toCreateMsMember.MemberAddress, toCreateMsMember.MemberPhone, toCreateMsMember.MemberEmail, toCreateMsMember.MemberPassword);
+
+            MsMember result = MsMemberRepository.CreateOne(currentMsMember);
             return result;
         }
         public MsMember UpdateOneByID(Guid ID, MsMember toUpdateMsMember)
         {
-            MsMember result = MsMemberRepository.UpdateOneByID(ID, toUpdateMsMember);
+            MsMember currentMsMember = MsMemberFactory.Create(toUpdateMsMember.MemberName, toUpdateMsMember.MemberDOB.GetValueOrDefault(), toUpdateMsMember.MemberGender, toUpdateMsMember.MemberAddress, toUpdateMsMember.MemberPhone, toUpdateMsMember.MemberEmail, toUpdateMsMember.MemberPassword);
+
+            MsMember result = MsMemberRepository.UpdateOneByID(ID, currentMsMember);
+
             return result;
         }
         public MsMember DeleteOneByID(Guid ID)
