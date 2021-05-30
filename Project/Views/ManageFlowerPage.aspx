@@ -20,7 +20,7 @@
             <asp:GridView ID="GridViewFlower" runat="server" OnRowCommand="GridViewFlower_RowCommand" AutoGenerateColumns="False">
                 <columns>
                     <asp:ButtonField CommandName="Update" ButtonType="Button" Text="Update" runat="server" />
-                    <asp:ButtonField CommandName="Delete" ButtonType="Button" Text="Delete" runat="server" />
+                    <asp:ButtonField CommandName="Remove" ButtonType="Button" Text="Remove" runat="server" />
                 
                     <asp:BoundField DataField="FlowerID" HeaderText="ID" />
                     <asp:BoundField DataField="FlowerName" HeaderText="Name" />

@@ -15,7 +15,7 @@
             <asp:GridView ID="GridViewMember" runat="server" OnRowCommand="GridViewMember_RowCommand">
                 <Columns>
                     <asp:ButtonField CommandName="Update" ButtonType="Button" Text="Update" runat="server" />
-                    <asp:ButtonField CommandName="Delete" ButtonType="Button" Text="Delete" runat="server" />
+                    <asp:ButtonField CommandName="Remove" ButtonType="Button" Text="Remove" runat="server" />
                 </Columns>
             </asp:GridView>
         </div>
