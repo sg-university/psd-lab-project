@@ -1,4 +1,5 @@
-﻿using Project.Models;
+﻿using Project.Factory;
+using Project.Models;
 using Project.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ namespace Project.Handlers
     public class MsEmployeeAuthenticationHandler
     {
         readonly MsEmployeeHandler MsEmployeeHandler = new MsEmployeeHandler();
+        readonly MsEmployeeFactory MsEmployeeFactory = new MsEmployeeFactory();
+
         public MsEmployee Register(MsEmployee toRegisterMsEmployee)
         {
-            MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(toRegisterMsEmployee);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(toRegisterMsEmployee.EmployeeName, toRegisterMsEmployee.EmployeeDOB.GetValueOrDefault(), toRegisterMsEmployee.EmployeeGender, toRegisterMsEmployee.EmployeeAddress, toRegisterMsEmployee.EmployeePhone, toRegisterMsEmployee.EmployeeRole, toRegisterMsEmployee.EmployeeSalary.GetValueOrDefault(), toRegisterMsEmployee.EmployeeEmail, toRegisterMsEmployee.EmployeePassword);
+
+            MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(currentMsEmployee);
 
             return registeredMsEmployee;
         }

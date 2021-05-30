@@ -11,7 +11,6 @@ namespace Project.Controllers
     public class MsMemberController
     {
         readonly MsMemberHandler MsMemberHandler = new MsMemberHandler();
-
         public Result ReadAll()
         {
             Result result = new Result();
@@ -61,6 +60,22 @@ namespace Project.Controllers
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Name must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isDateValid = toCreateMsMember.MemberDOB.GetValueOrDefault() != null;
+            if (!isDateValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be valid";
+                return result;
+            }
+
+            Boolean isDateRangeValid = toCreateMsMember.MemberDOB.GetValueOrDefault().Year >= 1753;
+            if (!isDateRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "TDOB must be in valid range (1753 <= Year <= 9999)";
                 return result;
             }
 
@@ -143,6 +158,22 @@ namespace Project.Controllers
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Name must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isDateValid = toUpdateMsMember.MemberDOB.GetValueOrDefault() != null;
+            if (!isDateValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be valid";
+                return result;
+            }
+
+            Boolean isDateRangeValid = toUpdateMsMember.MemberDOB.GetValueOrDefault().Year >= 1753;
+            if (!isDateRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be in valid range (1753 <= Year <= 9999)";
                 return result;
             }
 

@@ -32,7 +32,7 @@ namespace Project.Controllers
             if (!isDateRangeValid)
             {
                 result.ErrorCode = "403";
-                result.ErrorMessage = "Transaction Date must be in valid range";
+                result.ErrorMessage = "Transaction Date must be in valid range (1753 <= Year <= 9999)";
                 return result;
             }
 
@@ -61,6 +61,15 @@ namespace Project.Controllers
                 return result;
             }
 
+            toCreateTrDetail = toCreateTrDetail
+            .GroupBy(x => x.FlowerID)
+            .Select(x => new TrDetail()
+            {
+                DetailID = x.First().DetailID,
+                FlowerID = x.First().FlowerID.GetValueOrDefault(),
+                Quantity = x.Sum(y => y.Quantity.GetValueOrDefault())
+            }).ToList();
+
             Boolean isAllFlowerCountValid = toCreateTrDetail.Count > 1;
             if (!isAllFlowerCountValid)
             {
@@ -69,8 +78,7 @@ namespace Project.Controllers
                 return result;
             }
 
-
-            Boolean isQuantityValid = !toCreateTrDetail.Select(x => (1 >= x.Quantity) && (x.Quantity <= 100)).ToList().Exists(x => false); ;
+            Boolean isQuantityValid = toCreateTrDetail.Select(x => (1 <= x.Quantity) && (x.Quantity <= 100)).ToList().All(x => x == true);
             if (!isQuantityValid)
             {
                 result.ErrorCode = "403";
@@ -88,14 +96,9 @@ namespace Project.Controllers
                 return result;
             }
 
-            TrHeader currentTrHeader = TrHeaderHandler.CreateOne(toCreateTrHeader);
-
-            List<TrDetail> currentTrDetail = toCreateTrDetail.Select(x =>
-            TrDetailHandler.CreateOne(x)).ToList();
-
             result.SuccessCode = "200";
-            result.SucessMessage = "Succeed to create one Pre Order";
-            result.Data = currentTrHeader;
+            result.SucessMessage = "Succeed to create one Pre-order";
+            result.Data = PreOrderHandler.CreateOne(toCreateTrHeader, toCreateTrDetail);
             return result;
         }
     }

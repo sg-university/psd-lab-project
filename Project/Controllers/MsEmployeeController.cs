@@ -64,6 +64,22 @@ namespace Project.Controllers
                 return result;
             }
 
+            Boolean isDateValid = toCreateMsEmployee.EmployeeDOB.GetValueOrDefault() != null;
+            if (!isDateValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be valid";
+                return result;
+            }
+
+            Boolean isDateRangeValid = toCreateMsEmployee.EmployeeDOB.GetValueOrDefault().Year >= 1753;
+            if (!isDateRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "DOB must be in valid range (1753 <= Year <= 9999)";
+                return result;
+            }
+
             Boolean isDOBValid = Math.Abs(toCreateMsEmployee.EmployeeDOB.Value.Year - DateTime.Now.Year) >= 17;
             if (!isDOBValid)
             {
@@ -143,6 +159,22 @@ namespace Project.Controllers
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Name must be length of 3-20 characters";
+                return result;
+            }
+
+            Boolean isDateValid = toUpdateMsEmployee.EmployeeDOB.GetValueOrDefault() != null;
+            if (!isDateValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Transaction Date must be valid";
+                return result;
+            }
+
+            Boolean isDateRangeValid = toUpdateMsEmployee.EmployeeDOB.GetValueOrDefault().Year >= 1753;
+            if (!isDateRangeValid)
+            {
+                result.ErrorCode = "403";
+                result.ErrorMessage = "Transaction Date must be in valid range (1753 <= Year <= 9999)";
                 return result;
             }
 

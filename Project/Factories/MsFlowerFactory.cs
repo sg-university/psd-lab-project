@@ -26,7 +26,7 @@ namespace Project.Factory
         {
             MsFlower createdMsFlower = new MsFlower
             {
-                FlowerID = Guid.NewGuid(),
+                FlowerID = Guid.Empty,
                 FlowerName = name,
                 FlowerTypeID = typeID,
                 FlowerDescription = description,

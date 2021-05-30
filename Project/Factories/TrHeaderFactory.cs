@@ -8,11 +8,11 @@ namespace Project.Factory
 {
     public class TrHeaderFactory
     {
-        public TrHeader Create(Guid transactionID, Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
+        public TrHeader Create(Guid ID, Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
         {
             TrHeader createdTrHeader = new TrHeader
             {
-                TransactionID = transactionID,
+                TransactionID = ID,
                 MemberID = memberID,
                 EmployeeID = employeeID,
                 TransactionDate = transactionDate,
@@ -26,7 +26,7 @@ namespace Project.Factory
         {
             TrHeader createdTrHeader = new TrHeader
             {
-                TransactionID = Guid.NewGuid(),
+                TransactionID = Guid.Empty,
                 MemberID = memberID,
                 EmployeeID = employeeID,
                 TransactionDate = transactionDate,

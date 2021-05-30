@@ -5,6 +5,20 @@ DROP TABLE IF EXISTS MsEmployee;
 DROP TABLE IF EXISTS MsMember;
 DROP TABLE IF EXISTS MsFlower;
 
+DELETE FROM TrDetail;
+DELETE FROM TrHeader;
+DELETE FROM MsEmployee;
+DELETE FROM MsMember;
+DELETE FROM MsFlowerType;
+DELETE FROM MsFlower;
+
+INSERT INTO MsFlowerType values
+(newid(), 'Daisies'),
+(newid(), 'Lilies'),
+(newid(), 'Roses')
+
+SELECT * FROM trheader th, trdetail td WHERE th.TransactionID=td.TransactionID;
+
 CREATE TABLE MsUser
 (UserID       UNIQUEIDENTIFIER primary key, 
  UserName     VARCHAR(MAX), 

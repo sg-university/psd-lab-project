@@ -29,7 +29,7 @@ namespace Project.Factory
         {
             MsMember createdMsMember = new MsMember
             {
-                MemberID = Guid.NewGuid(),
+                MemberID = Guid.Empty,
                 MemberName = name,
                 MemberDOB = DOB,
                 MemberGender = gender,

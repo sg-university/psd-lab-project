@@ -25,13 +25,17 @@ namespace Project.Handlers
         }
         public MsEmployee CreateOne(MsEmployee toCreateMsEmployee)
         {
-            toCreateMsEmployee.EmployeeID = Guid.NewGuid();
-            MsEmployee result = MsEmployeeRepository.CreateOne(toCreateMsEmployee);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(Guid.NewGuid(), toCreateMsEmployee.EmployeeName, toCreateMsEmployee.EmployeeDOB.GetValueOrDefault(), toCreateMsEmployee.EmployeeGender, toCreateMsEmployee.EmployeeAddress, toCreateMsEmployee.EmployeePhone, toCreateMsEmployee.EmployeeRole, toCreateMsEmployee.EmployeeSalary.GetValueOrDefault(), toCreateMsEmployee.EmployeeEmail, toCreateMsEmployee.EmployeePassword);
+
+            MsEmployee result = MsEmployeeRepository.CreateOne(currentMsEmployee);
+
             return result;
         }
         public MsEmployee UpdateOneByID(Guid ID, MsEmployee toUpdateMsEmployee)
         {
-            MsEmployee result = MsEmployeeRepository.UpdateOneByID(ID, toUpdateMsEmployee);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(toUpdateMsEmployee.EmployeeName, toUpdateMsEmployee.EmployeeDOB.GetValueOrDefault(), toUpdateMsEmployee.EmployeeGender, toUpdateMsEmployee.EmployeeAddress, toUpdateMsEmployee.EmployeePhone, toUpdateMsEmployee.EmployeeRole, toUpdateMsEmployee.EmployeeSalary.GetValueOrDefault(), toUpdateMsEmployee.EmployeeEmail, toUpdateMsEmployee.EmployeePassword);
+
+            MsEmployee result = MsEmployeeRepository.UpdateOneByID(ID, currentMsEmployee);
             return result;
         }
         public MsEmployee DeleteOneByID(Guid ID)
