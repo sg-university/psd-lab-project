@@ -9,11 +9,11 @@ namespace Project.Controllers
 {
     public class ReportController
     {
-        ReportHandler reportHandler = new ReportHandler();
+        ReportHandler ReportHandler = new ReportHandler();
 
         public MemberTransactionDataset createDataSet()
         {
-            return reportHandler.createDataSet();
+            return ReportHandler.createDataSet();
         }
     }
 }
