@@ -11,12 +11,12 @@ namespace Project.Handlers
 {
     public class ReportHandler
     {
-        TrHeaderRepository headerRepository = new TrHeaderRepository();
-        ReportFactory reportFactory = new ReportFactory();
+        TrHeaderRepository TrHeaderRepository = new TrHeaderRepository();
+        ReportFactory ReportFactory = new ReportFactory();
 
         public MemberTransactionDataset createDataSet()
         {
-            return reportFactory.createDataSet(headerRepository.ReadAll());
+            return ReportFactory.createDataSet(TrHeaderRepository.ReadAll());
         }
        
     }

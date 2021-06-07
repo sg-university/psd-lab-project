@@ -1241,7 +1241,7 @@
     <Content Include="Views\MemberHomePage.aspx" />
     <Content Include="Views\PreOrderPage.aspx" />
     <Content Include="Views\RegisterPage.aspx" />
-    <Content Include="Views\ViewReportPage.aspx" />
+    <Content Include="Views\TransactionHistoryPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1478,12 +1478,12 @@
     <Compile Include="Views\RegisterPage.aspx.designer.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewReportPage.aspx.cs">
-      <DependentUpon>ViewReportPage.aspx</DependentUpon>
+    <Compile Include="Views\TransactionHistoryPage.aspx.cs">
+      <DependentUpon>TransactionHistoryPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\ViewReportPage.aspx.designer.cs">
-      <DependentUpon>ViewReportPage.aspx</DependentUpon>
+    <Compile Include="Views\TransactionHistoryPage.aspx.designer.cs">
+      <DependentUpon>TransactionHistoryPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
