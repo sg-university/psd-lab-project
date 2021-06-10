@@ -73,6 +73,8 @@ namespace Project.Views
                 case "Add":
                     try
                     {
+                        // kami menggunakan factory di view karena fitur preorder tidak mungkin diimplementasi dengan cara membuat semua object fieldnya menjadi parameter. soalnya field yg dipassing itu dalam bentuk one-to-many, dimana many nya bisa unlimited. sedangkan jika fieldnya dipecah satu-satu menjadi parameter akan menjadi tidak mungkin untuk dilakukan.
+
                         TrDetail currentTrDetail = TrDetailFactory.Create(Guid.Empty, flowerID, quantity);
                         toCreateTrDetail.Add(currentTrDetail);
 

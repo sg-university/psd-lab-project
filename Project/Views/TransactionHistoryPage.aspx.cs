@@ -16,7 +16,7 @@ namespace Project.Views
         {
             MemberTransactionReport memberReport = new MemberTransactionReport();
             reportViewer.ReportSource = memberReport;
-            memberReport.SetDataSource(ReportController.createDataSet());
+            memberReport.SetDataSource(ReportController.CreateDataSet());
 
         }
     }

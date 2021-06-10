@@ -14,7 +14,7 @@ namespace Project.Handlers
         TrHeaderRepository TrHeaderRepository = new TrHeaderRepository();
         ReportFactory ReportFactory = new ReportFactory();
 
-        public MemberTransactionDataset createDataSet()
+        public MemberTransactionDataSet CreateDataSet()
         {
             return ReportFactory.createDataSet(TrHeaderRepository.ReadAll());
         }
