@@ -10,54 +10,84 @@ namespace Project.Factories
     public class ReportFactory
     {
 
-        public MemberTransactionDataset createDataSet(List<TrHeader> memberTransaction)
+        public MemberTransactionDataSet createDataSet(List<TrHeader> TrHeader)
         {
-            MemberTransactionDataset transactionDataset = new MemberTransactionDataset();
-            var header = transactionDataset.TrHeader;
-            var hMember = transactionDataset.MsMember;
-            var hEmployee = transactionDataset.MsEmployee;
-            var details = transactionDataset.TrDetail;
-            var dFlower = transactionDataset.MsFlower;
+            MemberTransactionDataSet MemberTransactionDataSet = new MemberTransactionDataSet();
+            var header = MemberTransactionDataSet.TrHeader;
+            var hMember = MemberTransactionDataSet.MsMember;
+            var hEmployee = MemberTransactionDataSet.MsEmployee;
+            var details = MemberTransactionDataSet.TrDetail;
+            var dFlower = MemberTransactionDataSet.MsFlower;
 
-            foreach (TrHeader tr in memberTransaction)
+            List<TrHeader> cleanedTrHeader = TrHeader.GroupBy(x => x.TransactionID)
+                         .Select(x => new TrHeader()
+                         {
+                             TransactionID = x.First().TransactionID,
+                             MemberID = x.First().MemberID.GetValueOrDefault(),
+                             EmployeeID = x.First().EmployeeID.GetValueOrDefault(),
+                             TransactionDate = x.First().TransactionDate.GetValueOrDefault(),
+                             DiscountPercentage = x.First().DiscountPercentage.GetValueOrDefault(),
+                             TrDetails = x.First().TrDetails,
+                             MsMember = x.First().MsMember,
+                             MsEmployee = x.First().MsEmployee,
+                         }).ToList();
+
+            foreach (TrHeader trh in cleanedTrHeader)
             {
                 var rowHeader = header.NewRow();
-                rowHeader["TransactionID"] = tr.TransactionID;
-                rowHeader["EmployeeID"] = tr.EmployeeID;
-                rowHeader["MemberID"] = tr.MemberID;
-                rowHeader["TransactionDate"] = tr.TransactionDate;
-                rowHeader["DiscountPercentage"] = tr.DiscountPercentage;
+                rowHeader["TransactionID"] = trh.TransactionID;
+                rowHeader["MemberID"] = trh.MemberID.GetValueOrDefault();
+                rowHeader["EmployeeID"] = trh.EmployeeID.GetValueOrDefault();
+                rowHeader["TransactionDate"] = trh.TransactionDate.GetValueOrDefault();
+                rowHeader["DiscountPercentage"] = trh.DiscountPercentage.GetValueOrDefault();
 
                 var rowMember = hMember.NewRow();
-                rowMember["MemberName"] = tr.MsMember.MemberName;
+                rowMember["MemberID"] = trh.MsMember.MemberID;
+                rowMember["MemberName"] = trh.MsMember.MemberName;
                 hMember.Rows.Add(rowMember);
 
                 var rowEmployee = hEmployee.NewRow();
-                rowEmployee["EmployeeName"] = tr.MsEmployee.EmployeeName;
+                rowEmployee["EmployeeID"] = trh.MsEmployee.EmployeeID;
+                rowEmployee["EmployeeName"] = trh.MsEmployee.EmployeeName;
                 hEmployee.Rows.Add(rowEmployee);
 
-                int gPrice = 0;
-                int pr = 0;
-                foreach (TrDetail trdetail in tr.TrDetails)
+                Decimal grandTotalPrice = 0;
+                Decimal rowDetailPrice = 0;
+
+                List<TrDetail> cleanedTrDetail = trh.TrDetails.GroupBy(x => x.FlowerID)
+                         .Select(x => new TrDetail()
+                         {
+                             DetailID = x.First().DetailID,
+                             TransactionID = x.First().TransactionID,
+                             FlowerID = x.First().FlowerID.GetValueOrDefault(),
+                             Quantity = x.Sum(y => y.Quantity.GetValueOrDefault()),
+                             MsFlower = x.First().MsFlower,
+                             TrHeader = x.First().TrHeader
+                         }).ToList();
+
+                foreach (TrDetail trd in cleanedTrDetail)
                 {
                     var rowDetail = details.NewRow();
-                    rowDetail["FlowerID"] = trdetail.FlowerID;
-                    rowDetail["Quantity"] = trdetail.Quantity;
-                    pr = (int.Parse(trdetail.Quantity.ToString()) * int.Parse(trdetail.MsFlower.FlowerPrice.ToString()));
-                    gPrice += pr;
-                    rowDetail["Total"] = pr;
+                    rowDetail["TransactionID"] = trd.TransactionID.GetValueOrDefault();
+                    rowDetail["FlowerID"] = trd.FlowerID.GetValueOrDefault();
+                    rowDetail["Quantity"] = trd.Quantity.GetValueOrDefault();
+                    rowDetailPrice = trd.Quantity.GetValueOrDefault() * trd.MsFlower.FlowerPrice.GetValueOrDefault();
+                    grandTotalPrice += rowDetailPrice;
+                    rowDetail["Total"] = rowDetailPrice;
                     details.Rows.Add(rowDetail);
 
                     var rowFlower = dFlower.NewRow();
-                    rowFlower["FlowerName"] = trdetail.MsFlower.FlowerName;
-                    rowFlower["FlowerPrice"] = trdetail.MsFlower.FlowerPrice;
+                    rowFlower["FlowerID"] = trd.MsFlower.FlowerID;
+                    rowFlower["FlowerName"] = trd.MsFlower.FlowerName;
+                    rowFlower["FlowerPrice"] = trd.MsFlower.FlowerPrice.GetValueOrDefault();
                     dFlower.Rows.Add(rowFlower);
                 }
 
-                rowHeader["GrandTotal"] = gPrice;
+                rowHeader["GrandTotal"] = grandTotalPrice;
                 header.Rows.Add(rowHeader);
             }
-            return transactionDataset;
+
+            return MemberTransactionDataSet;
         }
 
     }

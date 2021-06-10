@@ -11,9 +11,9 @@ namespace Project.Controllers
     {
         ReportHandler ReportHandler = new ReportHandler();
 
-        public MemberTransactionDataset createDataSet()
+        public MemberTransactionDataSet CreateDataSet()
         {
-            return ReportHandler.createDataSet();
+            return ReportHandler.CreateDataSet();
         }
     }
 }

@@ -1255,10 +1255,10 @@
     <Compile Include="Controllers\TrDetailController.cs" />
     <Compile Include="Controllers\PreOrderController.cs" />
     <Compile Include="Controllers\TrHeaderController.cs" />
-    <Compile Include="Dataset\MemberTransactionDataset.Designer.cs">
+    <Compile Include="Dataset\MemberTransactionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MemberTransactionDataset.xsd</DependentUpon>
+      <DependentUpon>MemberTransactionDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Factories\ReportFactory.cs" />
     <Compile Include="Factories\TrDetailFactory.cs" />
@@ -1494,16 +1494,16 @@
     <Content Include="Models\NeinteenFlowerDBModel.edmx.diagram">
       <DependentUpon>NeinteenFlowerDBModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Dataset\MemberTransactionDataset.xsc">
-      <DependentUpon>MemberTransactionDataset.xsd</DependentUpon>
+    <Content Include="Dataset\MemberTransactionDataSet.xsc">
+      <DependentUpon>MemberTransactionDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Dataset\MemberTransactionDataset.xsd">
+    <None Include="Dataset\MemberTransactionDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MemberTransactionDataset.Designer.cs</LastGenOutput>
+      <LastGenOutput>MemberTransactionDataSet.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Dataset\MemberTransactionDataset.xss">
-      <DependentUpon>MemberTransactionDataset.xsd</DependentUpon>
+    <Content Include="Dataset\MemberTransactionDataSet.xss">
+      <DependentUpon>MemberTransactionDataSet.xsd</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\GuestNavigation.Master" />
