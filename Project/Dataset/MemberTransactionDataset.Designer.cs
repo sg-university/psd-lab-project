@@ -457,6 +457,8 @@ namespace Project.Dataset {
             
             private global::System.Data.DataColumn columnDiscountPercentage;
             
+            private global::System.Data.DataColumn columnGrandTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TrHeaderDataTable() {
@@ -532,6 +534,14 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn GrandTotalColumn {
+                get {
+                    return this.columnGrandTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -567,14 +577,15 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TrHeaderRow AddTrHeaderRow(string TransactionID, MsMemberRow parentMsMemberRowByMsMember_TrHeader, MsEmployeeRow parentMsEmployeeRowByMsEmployee_TrHeader, string TransactionDate, string DiscountPercentage) {
+            public TrHeaderRow AddTrHeaderRow(string TransactionID, MsMemberRow parentMsMemberRowByMsMember_TrHeader, MsEmployeeRow parentMsEmployeeRowByMsEmployee_TrHeader, string TransactionDate, string DiscountPercentage, string GrandTotal) {
                 TrHeaderRow rowTrHeaderRow = ((TrHeaderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TransactionID,
                         null,
                         null,
                         TransactionDate,
-                        DiscountPercentage};
+                        DiscountPercentage,
+                        GrandTotal};
                 if ((parentMsMemberRowByMsMember_TrHeader != null)) {
                     columnValuesArray[1] = parentMsMemberRowByMsMember_TrHeader[0];
                 }
@@ -608,6 +619,7 @@ namespace Project.Dataset {
                 this.columnEmployeeID = base.Columns["EmployeeID"];
                 this.columnTransactionDate = base.Columns["TransactionDate"];
                 this.columnDiscountPercentage = base.Columns["DiscountPercentage"];
+                this.columnGrandTotal = base.Columns["GrandTotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -623,6 +635,8 @@ namespace Project.Dataset {
                 base.Columns.Add(this.columnTransactionDate);
                 this.columnDiscountPercentage = new global::System.Data.DataColumn("DiscountPercentage", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDiscountPercentage);
+                this.columnGrandTotal = new global::System.Data.DataColumn("GrandTotal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGrandTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -762,6 +776,8 @@ namespace Project.Dataset {
             
             private global::System.Data.DataColumn columnQuantity;
             
+            private global::System.Data.DataColumn columnTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TrDetailDataTable() {
@@ -821,6 +837,14 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalColumn {
+                get {
+                    return this.columnTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -856,12 +880,13 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TrDetailRow AddTrDetailRow(TrHeaderRow parentTrHeaderRowByTrHeader_TrDetail, MsFlowerRow parentMsFlowerRowByMsFlower_TrDetail, string Quantity) {
+            public TrDetailRow AddTrDetailRow(TrHeaderRow parentTrHeaderRowByTrHeader_TrDetail, MsFlowerRow parentMsFlowerRowByMsFlower_TrDetail, string Quantity, string Total) {
                 TrDetailRow rowTrDetailRow = ((TrDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        Quantity};
+                        Quantity,
+                        Total};
                 if ((parentTrHeaderRowByTrHeader_TrDetail != null)) {
                     columnValuesArray[0] = parentTrHeaderRowByTrHeader_TrDetail[0];
                 }
@@ -893,6 +918,7 @@ namespace Project.Dataset {
                 this.columnTransactionID = base.Columns["TransactionID"];
                 this.columnFlowerID = base.Columns["FlowerID"];
                 this.columnQuantity = base.Columns["Quantity"];
+                this.columnTotal = base.Columns["Total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -904,6 +930,8 @@ namespace Project.Dataset {
                 base.Columns.Add(this.columnFlowerID);
                 this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantity);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1923,6 +1951,22 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string GrandTotal {
+                get {
+                    try {
+                        return ((string)(this[this.tableTrHeader.GrandTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GrandTotal\' in table \'TrHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrHeader.GrandTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public MsEmployeeRow MsEmployeeRow {
                 get {
                     return ((MsEmployeeRow)(this.GetParentRow(this.Table.ParentRelations["MsEmployee_TrHeader"])));
@@ -2005,6 +2049,18 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsGrandTotalNull() {
+                return this.IsNull(this.tableTrHeader.GrandTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetGrandTotalNull() {
+                this[this.tableTrHeader.GrandTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TrDetailRow[] GetTrDetailRows() {
                 if ((this.Table.ChildRelations["TrHeader_TrDetail"] == null)) {
                     return new TrDetailRow[0];
@@ -2079,6 +2135,22 @@ namespace Project.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Total {
+                get {
+                    try {
+                        return ((string)(this[this.tableTrDetail.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'TrDetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrDetail.TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TrHeaderRow TrHeaderRow {
                 get {
                     return ((TrHeaderRow)(this.GetParentRow(this.Table.ParentRelations["TrHeader_TrDetail"])));
@@ -2133,6 +2205,18 @@ namespace Project.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetQuantityNull() {
                 this[this.tableTrDetail.QuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tableTrDetail.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tableTrDetail.TotalColumn] = global::System.Convert.DBNull;
             }
         }
         

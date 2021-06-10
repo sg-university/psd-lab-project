@@ -27,7 +27,6 @@ namespace Project.Factories
                 rowHeader["MemberID"] = tr.MemberID;
                 rowHeader["TransactionDate"] = tr.TransactionDate;
                 rowHeader["DiscountPercentage"] = tr.DiscountPercentage;
-                header.Rows.Add(rowHeader);
 
                 var rowMember = hMember.NewRow();
                 rowMember["MemberName"] = tr.MsMember.MemberName;
@@ -37,11 +36,16 @@ namespace Project.Factories
                 rowEmployee["EmployeeName"] = tr.MsEmployee.EmployeeName;
                 hEmployee.Rows.Add(rowEmployee);
 
+                int gPrice = 0;
+                int pr = 0;
                 foreach (TrDetail trdetail in tr.TrDetails)
                 {
                     var rowDetail = details.NewRow();
                     rowDetail["FlowerID"] = trdetail.FlowerID;
                     rowDetail["Quantity"] = trdetail.Quantity;
+                    pr = (int.Parse(trdetail.Quantity.ToString()) * int.Parse(trdetail.MsFlower.FlowerPrice.ToString()));
+                    gPrice += pr;
+                    rowDetail["Total"] = pr;
                     details.Rows.Add(rowDetail);
 
                     var rowFlower = dFlower.NewRow();
@@ -49,6 +53,9 @@ namespace Project.Factories
                     rowFlower["FlowerPrice"] = trdetail.MsFlower.FlowerPrice;
                     dFlower.Rows.Add(rowFlower);
                 }
+
+                rowHeader["GrandTotal"] = gPrice;
+                header.Rows.Add(rowHeader);
             }
             return transactionDataset;
         }
