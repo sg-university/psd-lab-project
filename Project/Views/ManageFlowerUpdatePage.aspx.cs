@@ -73,7 +73,7 @@ namespace Project.Views
 
             MsFlower toUpdateMsFlower = MsFlowerFactory.Create(name, typeID, description, price, toSaveImage);
 
-            Result result = MsFlowerController.UpdateOneByID(ID, toUpdateMsFlower);
+            Result result = MsFlowerController.UpdateOneByID(ID, toUpdateMsFlower.FlowerName, toUpdateMsFlower.FlowerTypeID.GetValueOrDefault(), toUpdateMsFlower.FlowerImage, toUpdateMsFlower.FlowerDescription, toUpdateMsFlower.FlowerPrice.GetValueOrDefault());
 
             if (result.SuccessCode != null)
             {
