@@ -24,17 +24,17 @@ namespace Project.Handlers
             MsFlower result = MsFlowerRepository.ReadOneByID(ID);
             return result;
         }
-        public MsFlower CreateOne(MsFlower toCreateMsFlower)
+        public MsFlower CreateOne(string name, Guid typeID, string image, string description, decimal price)
         {
-            MsFlower currentMsFlower = MsFlowerFactory.Create(Guid.NewGuid(), toCreateMsFlower.FlowerName, toCreateMsFlower.FlowerTypeID.GetValueOrDefault(), toCreateMsFlower.FlowerDescription, toCreateMsFlower.FlowerPrice.GetValueOrDefault(), toCreateMsFlower.FlowerImage);
+            MsFlower currentMsFlower = MsFlowerFactory.Create(Guid.NewGuid(), name, typeID, description, price, image);
             //currentMsFlower.FlowerImage = "~/Assets/Images/" + Guid.NewGuid().ToString();
 
             MsFlower result = MsFlowerRepository.CreateOne(currentMsFlower);
             return result;
         }
-        public MsFlower UpdateOneByID(Guid ID, MsFlower toUpdateMsFlower)
+        public MsFlower UpdateOneByID(Guid ID, string name, Guid typeID, string image, string description, decimal price)
         {
-            MsFlower currentMsFlower = MsFlowerFactory.Create(toUpdateMsFlower.FlowerName, toUpdateMsFlower.FlowerTypeID.GetValueOrDefault(), toUpdateMsFlower.FlowerDescription, toUpdateMsFlower.FlowerPrice.GetValueOrDefault(), toUpdateMsFlower.FlowerImage);
+            MsFlower currentMsFlower = MsFlowerFactory.Create(name, typeID, description, price, image);
             MsFlower result = MsFlowerRepository.UpdateOneByID(ID, currentMsFlower);
             return result;
         }

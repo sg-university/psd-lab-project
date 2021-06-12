@@ -27,20 +27,20 @@ namespace Project.Controllers
             result.Data = TrDetailHandler.ReadOneByID(ID);
             return result;
         }
-        public Result CreateOne(TrDetail toCreateTrDetail)
+        public Result CreateOne(Guid transactionID, Guid flowerID, decimal quantity)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Transaction Detail";
-            result.Data = TrDetailHandler.CreateOne(toCreateTrDetail);
+            result.Data = TrDetailHandler.CreateOne(transactionID, flowerID, quantity);
             return result;
         }
-        public Result UpdateOneByID(Guid ID, TrDetail toUpdateTrDetail)
+        public Result UpdateOneByID(Guid ID, Guid transactionID, Guid flowerID, decimal quantity)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to update one Transaction Detail";
-            result.Data = TrDetailHandler.UpdateOneByID(ID, toUpdateTrDetail);
+            result.Data = TrDetailHandler.UpdateOneByID(ID, transactionID, flowerID, quantity);
             return result;
         }
         public Result DeleteOneByID(Guid ID)
