@@ -22,16 +22,16 @@ namespace Project.Handlers
             MsFlowerType result = MsFlowerTypeRepository.ReadOneByID(ID);
             return result;
         }
-        public MsFlowerType CreateOne(MsFlowerType toCreateMsFlowerType)
+        public MsFlowerType CreateOne(string typeName)
         {
-            MsFlowerType currentMsFlowerType = MsFlowerTypeFactory.Create(Guid.NewGuid(), toCreateMsFlowerType.FlowerTypeName);
+            MsFlowerType currentMsFlowerType = MsFlowerTypeFactory.Create(Guid.NewGuid(), typeName);
 
             MsFlowerType result = MsFlowerTypeRepository.CreateOne(currentMsFlowerType);
             return result;
         }
-        public MsFlowerType UpdateOneByID(Guid ID, MsFlowerType toUpdateMsFlowerType)
+        public MsFlowerType UpdateOneByID(Guid ID, string typeName)
         {
-            MsFlowerType currentMsFlowerType = MsFlowerTypeFactory.Create(toUpdateMsFlowerType.FlowerTypeName);
+            MsFlowerType currentMsFlowerType = MsFlowerTypeFactory.Create(typeName);
 
             MsFlowerType result = MsFlowerTypeRepository.UpdateOneByID(ID, currentMsFlowerType);
             return result;

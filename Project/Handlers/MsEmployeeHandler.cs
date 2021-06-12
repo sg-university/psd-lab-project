@@ -23,17 +23,17 @@ namespace Project.Handlers
             MsEmployee result = MsEmployeeRepository.ReadOneByID(ID);
             return result;
         }
-        public MsEmployee CreateOne(MsEmployee toCreateMsEmployee)
+        public MsEmployee CreateOne(String name, DateTime DOB, String gender, String address, String phone, String role, Decimal salary, String email, String password)
         {
-            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(Guid.NewGuid(), toCreateMsEmployee.EmployeeName, toCreateMsEmployee.EmployeeDOB.GetValueOrDefault(), toCreateMsEmployee.EmployeeGender, toCreateMsEmployee.EmployeeAddress, toCreateMsEmployee.EmployeePhone, toCreateMsEmployee.EmployeeRole, toCreateMsEmployee.EmployeeSalary.GetValueOrDefault(), toCreateMsEmployee.EmployeeEmail, toCreateMsEmployee.EmployeePassword);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(Guid.NewGuid(), name, DOB, gender, address, phone, role, salary, email, password);
 
             MsEmployee result = MsEmployeeRepository.CreateOne(currentMsEmployee);
 
             return result;
         }
-        public MsEmployee UpdateOneByID(Guid ID, MsEmployee toUpdateMsEmployee)
+        public MsEmployee UpdateOneByID(Guid ID, String name, DateTime DOB, String gender, String address, String phone, String role, Decimal salary, String email, String password)
         {
-            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(toUpdateMsEmployee.EmployeeName, toUpdateMsEmployee.EmployeeDOB.GetValueOrDefault(), toUpdateMsEmployee.EmployeeGender, toUpdateMsEmployee.EmployeeAddress, toUpdateMsEmployee.EmployeePhone, toUpdateMsEmployee.EmployeeRole, toUpdateMsEmployee.EmployeeSalary.GetValueOrDefault(), toUpdateMsEmployee.EmployeeEmail, toUpdateMsEmployee.EmployeePassword);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);
 
             MsEmployee result = MsEmployeeRepository.UpdateOneByID(ID, currentMsEmployee);
             return result;

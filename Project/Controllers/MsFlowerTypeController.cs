@@ -27,20 +27,20 @@ namespace Project.Controllers
             result.Data = MsFlowerTypeHandler.ReadOneByID(ID);
             return result;
         }
-        public Result CreateOne(MsFlowerType toCreateMsFlowerType)
+        public Result CreateOne(string typeName)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Flower Type";
-            result.Data = MsFlowerTypeHandler.CreateOne(toCreateMsFlowerType);
+            result.Data = MsFlowerTypeHandler.CreateOne(typeName);
             return result;
         }
-        public Result UpdateOneByID(Guid ID, MsFlowerType toUpdateMsFlowerType)
+        public Result UpdateOneByID(Guid ID, string typeName)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to update one Flower Type";
-            result.Data = MsFlowerTypeHandler.UpdateOneByID(ID, toUpdateMsFlowerType);
+            result.Data = MsFlowerTypeHandler.UpdateOneByID(ID, typeName);
             return result;
         }
         public Result DeleteOneByID(Guid ID)

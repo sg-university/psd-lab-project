@@ -23,16 +23,16 @@ namespace Project.Handlers
             MsMember result = MsMemberRepository.ReadOneByID(ID);
             return result;
         }
-        public MsMember CreateOne(MsMember toCreateMsMember)
+        public MsMember CreateOne(string name, DateTime DOB, string gender, string address, string phone, string email, string password)
         {
-            MsMember currentMsMember = MsMemberFactory.Create(Guid.NewGuid(), toCreateMsMember.MemberName, toCreateMsMember.MemberDOB.GetValueOrDefault(), toCreateMsMember.MemberGender, toCreateMsMember.MemberAddress, toCreateMsMember.MemberPhone, toCreateMsMember.MemberEmail, toCreateMsMember.MemberPassword);
+            MsMember currentMsMember = MsMemberFactory.Create(Guid.NewGuid(), name, DOB, gender, address, phone, email, password);
 
             MsMember result = MsMemberRepository.CreateOne(currentMsMember);
             return result;
         }
-        public MsMember UpdateOneByID(Guid ID, MsMember toUpdateMsMember)
+        public MsMember UpdateOneByID(Guid ID, string name, DateTime DOB, string gender, string address, string phone, string email, string password)
         {
-            MsMember currentMsMember = MsMemberFactory.Create(toUpdateMsMember.MemberName, toUpdateMsMember.MemberDOB.GetValueOrDefault(), toUpdateMsMember.MemberGender, toUpdateMsMember.MemberAddress, toUpdateMsMember.MemberPhone, toUpdateMsMember.MemberEmail, toUpdateMsMember.MemberPassword);
+            MsMember currentMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
 
             MsMember result = MsMemberRepository.UpdateOneByID(ID, currentMsMember);
 
