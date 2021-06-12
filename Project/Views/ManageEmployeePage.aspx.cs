@@ -48,7 +48,7 @@ namespace Project.Views
                     }
                     catch
                     {
-                        HttpContext.Current.Response.Redirect("/Views/ErrorPage.aspx");
+                        //HttpContext.Current.Response.Redirect("/Views/ErrorPage.aspx");
                     }
                     break;
                 default:

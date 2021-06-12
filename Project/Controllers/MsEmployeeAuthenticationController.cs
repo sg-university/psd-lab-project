@@ -158,7 +158,7 @@ namespace Project.Controllers
 
             int alpha, digit, i;
             alpha = digit = i = 0;
-            while (captcha[i] != '\0')
+            while (i != captcha.Length)
             {
                 if ((captcha[i] >= 'a' && captcha[i] <= 'z') || (captcha[i] >= 'A' && captcha[i] <= 'Z'))
                 {
@@ -171,11 +171,11 @@ namespace Project.Controllers
                 i++;
             }
 
-            Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha == 3) && (digit == 3);
+            Boolean isCaptchaConsistsOfThreeRandomLettersAndNumbers = (alpha >= 3) && (digit >= 3);
             if (!isCaptchaConsistsOfThreeRandomLettersAndNumbers)
             {
                 result.ErrorCode = "403";
-                result.ErrorMessage = "Captcha must be consists of 3 letters and 3 numbers";
+                result.ErrorMessage = "Captcha must be consists of atleast 3 letters and 3 numbers";
                 return result;
             }
 

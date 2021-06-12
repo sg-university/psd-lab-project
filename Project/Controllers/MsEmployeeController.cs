@@ -166,7 +166,7 @@ namespace Project.Controllers
             if (!isDateValid)
             {
                 result.ErrorCode = "403";
-                result.ErrorMessage = "Transaction Date must be valid";
+                result.ErrorMessage = "DOB must be valid";
                 return result;
             }
 
@@ -174,7 +174,7 @@ namespace Project.Controllers
             if (!isDateRangeValid)
             {
                 result.ErrorCode = "403";
-                result.ErrorMessage = "Transaction Date must be in valid range (1753 <= Year <= 9999)";
+                result.ErrorMessage = "DOB must be in valid range (1753 <= Year <= 9999)";
                 return result;
             }
 
