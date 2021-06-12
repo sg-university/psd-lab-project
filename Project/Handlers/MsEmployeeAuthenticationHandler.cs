@@ -13,9 +13,9 @@ namespace Project.Handlers
         readonly MsEmployeeHandler MsEmployeeHandler = new MsEmployeeHandler();
         readonly MsEmployeeFactory MsEmployeeFactory = new MsEmployeeFactory();
 
-        public MsEmployee Register(MsEmployee toRegisterMsEmployee)
+        public MsEmployee Register(String name, DateTime DOB, String gender, String address, String phone, String role, Decimal salary, String email, String password)
         {
-            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(toRegisterMsEmployee.EmployeeName, toRegisterMsEmployee.EmployeeDOB.GetValueOrDefault(), toRegisterMsEmployee.EmployeeGender, toRegisterMsEmployee.EmployeeAddress, toRegisterMsEmployee.EmployeePhone, toRegisterMsEmployee.EmployeeRole, toRegisterMsEmployee.EmployeeSalary.GetValueOrDefault(), toRegisterMsEmployee.EmployeeEmail, toRegisterMsEmployee.EmployeePassword);
+            MsEmployee currentMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);
 
             MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(currentMsEmployee);
 

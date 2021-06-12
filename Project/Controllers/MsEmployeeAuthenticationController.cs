@@ -14,11 +14,11 @@ namespace Project.Controllers
         readonly MsEmployeeHandler MsEmployeeHandler = new MsEmployeeHandler();
 
 
-        public Result Register(MsEmployee toRegisterMsEmployee)
+        public Result Register(String name, DateTime DOB, String gender, String address, String phone, String role, Decimal salary, String email, String password)
         {
             Result result = new Result();
 
-            Boolean isEmailValid = toRegisterMsEmployee.EmployeeEmail.Contains("@") && toRegisterMsEmployee.EmployeeEmail.Contains(".");
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
             if (!isEmailValid)
             {
                 result.ErrorCode = "403";
@@ -26,7 +26,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(toRegisterMsEmployee.EmployeeEmail));
+            Boolean isEmailRegistered = MsEmployeeHandler.ReadAll().Exists(x => x.EmployeeEmail.Equals(email));
             if (isEmailRegistered)
             {
                 result.ErrorCode = "403";
@@ -34,7 +34,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isPasswordValid = (3 <= toRegisterMsEmployee.EmployeePassword.Length) && (toRegisterMsEmployee.EmployeePassword.Length <= 20);
+            Boolean isPasswordValid = (3 <= password.Length) && (password.Length <= 20);
             if (!isPasswordValid)
             {
                 result.ErrorCode = "403";
@@ -42,7 +42,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isNameValid = (3 <= toRegisterMsEmployee.EmployeeName.Length) && (toRegisterMsEmployee.EmployeeName.Length <= 20);
+            Boolean isNameValid = (3 <= name.Length) && (name.Length <= 20);
             if (!isNameValid)
             {
                 result.ErrorCode = "403";
@@ -50,7 +50,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDOBValid = Math.Abs(toRegisterMsEmployee.EmployeeDOB.Value.Year - DateTime.Now.Year) >= 17;
+            Boolean isDOBValid = Math.Abs(DOB.Year - DateTime.Now.Year) >= 17;
             if (!isDOBValid)
             {
                 result.ErrorCode = "403";
@@ -58,7 +58,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isGenderValid = !String.IsNullOrEmpty(toRegisterMsEmployee.EmployeeGender) && new List<String> { "other", "male", "female" }.Contains(toRegisterMsEmployee.EmployeeGender);
+            Boolean isGenderValid = !String.IsNullOrEmpty(gender) && new List<String> { "other", "male", "female" }.Contains(gender);
             if (!isGenderValid)
             {
                 result.ErrorCode = "403";
@@ -69,7 +69,7 @@ namespace Project.Controllers
             Boolean isPhoneNumberValid = true;
             try
             {
-                Decimal.Parse(toRegisterMsEmployee.EmployeePhone);
+                Decimal.Parse(phone);
             }
             catch
             {
@@ -83,7 +83,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isAddressValid = toRegisterMsEmployee.EmployeeAddress.ToLower().Contains("street");
+            Boolean isAddressValid = address.ToLower().Contains("street");
             if (!isAddressValid)
             {
                 result.ErrorCode = "403";
@@ -91,7 +91,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(toRegisterMsEmployee);
+            MsEmployee registeredMsEmployee = MsEmployeeAuthenticationHandler.Register(name, DOB, gender, address, phone, role, salary, email, password);
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to register a Employee";
             result.Data = registeredMsEmployee;

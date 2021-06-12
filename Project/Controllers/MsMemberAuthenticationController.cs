@@ -13,11 +13,11 @@ namespace Project.Controllers
         readonly MsMemberAuthenticationHandler MsMemberAuthenticationHandler = new MsMemberAuthenticationHandler();
         readonly MsMemberHandler MsMemberHandler = new MsMemberHandler();
 
-        public Result Register(MsMember toRegisterMsMember)
+        public Result Register(String name, DateTime DOB, String gender, String address, String phone, String email, String password)
         {
             Result result = new Result();
 
-            Boolean isEmailValid = toRegisterMsMember.MemberEmail.Contains("@") && toRegisterMsMember.MemberEmail.Contains(".");
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
             if (!isEmailValid)
             {
                 result.ErrorCode = "403";
@@ -25,7 +25,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(toRegisterMsMember.MemberEmail));
+            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email));
             if (isEmailRegistered)
             {
                 result.ErrorCode = "403";
@@ -33,7 +33,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isPasswordValid = (3 <= toRegisterMsMember.MemberPassword.Length) && (toRegisterMsMember.MemberPassword.Length <= 20);
+            Boolean isPasswordValid = (3 <= password.Length) && (password.Length <= 20);
             if (!isPasswordValid)
             {
                 result.ErrorCode = "403";
@@ -41,7 +41,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isNameValid = (3 <= toRegisterMsMember.MemberName.Length) && (toRegisterMsMember.MemberName.Length <= 20);
+            Boolean isNameValid = (3 <= name.Length) && (name.Length <= 20);
             if (!isNameValid)
             {
                 result.ErrorCode = "403";
@@ -49,7 +49,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDOBValid = Math.Abs(toRegisterMsMember.MemberDOB.Value.Year - DateTime.Now.Year) >= 17;
+            Boolean isDOBValid = Math.Abs(DOB.Year - DateTime.Now.Year) >= 17;
             if (!isDOBValid)
             {
                 result.ErrorCode = "403";
@@ -57,7 +57,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isGenderValid = !String.IsNullOrEmpty(toRegisterMsMember.MemberGender) && new List<String> { "other", "male", "female" }.Contains(toRegisterMsMember.MemberGender);
+            Boolean isGenderValid = !String.IsNullOrEmpty(gender) && new List<String> { "other", "male", "female" }.Contains(gender);
             if (!isGenderValid)
             {
                 result.ErrorCode = "403";
@@ -68,7 +68,7 @@ namespace Project.Controllers
             Boolean isPhoneNumberValid = true;
             try
             {
-                Decimal.Parse(toRegisterMsMember.MemberPhone);
+                Decimal.Parse(phone);
             }
             catch
             {
@@ -82,7 +82,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isAddressValid = toRegisterMsMember.MemberAddress.ToLower().Contains("street");
+            Boolean isAddressValid = address.ToLower().Contains("street");
             if (!isAddressValid)
             {
                 result.ErrorCode = "403";
@@ -90,7 +90,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            MsMember registeredMsMember = MsMemberAuthenticationHandler.Register(toRegisterMsMember);
+            MsMember registeredMsMember = MsMemberAuthenticationHandler.Register(name, DOB, gender, address, phone, email, password);
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to register a Member";
             result.Data = registeredMsMember;
