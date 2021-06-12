@@ -58,7 +58,7 @@ namespace Project.Views
                 return;
             }
 
-            Result result = MsFlowerController.CreateOne(toCreateMsFlower);
+            Result result = MsFlowerController.CreateOne(toCreateMsFlower.FlowerName, toCreateMsFlower.FlowerTypeID.GetValueOrDefault(), toCreateMsFlower.FlowerImage, toCreateMsFlower.FlowerDescription, toCreateMsFlower.FlowerPrice.GetValueOrDefault());
 
             if (result.SuccessCode != null)
             {

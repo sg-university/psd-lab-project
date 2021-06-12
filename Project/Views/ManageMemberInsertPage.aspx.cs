@@ -33,7 +33,7 @@ namespace Project.Views
 
             MsMember toCreateMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
 
-            Result result = MsMemberController.CreateOne(toCreateMsMember);
+            Result result = MsMemberController.CreateOne(toCreateMsMember.MemberName, toCreateMsMember.MemberDOB.GetValueOrDefault(), toCreateMsMember.MemberGender, toCreateMsMember.MemberAddress, toCreateMsMember.MemberPhone, toCreateMsMember.MemberEmail, toCreateMsMember.MemberPassword);
 
             if (result.SuccessCode != null)
             {
