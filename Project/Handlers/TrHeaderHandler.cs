@@ -23,17 +23,17 @@ namespace Project.Handlers
             TrHeader result = TrHeaderRepository.ReadOneByID(ID);
             return result;
         }
-        public TrHeader CreateOne(TrHeader toCreateTrHeader)
+        public TrHeader CreateOne(Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
         {
-            TrHeader currentTrHeader = TrHeaderFactory.Create(Guid.NewGuid(), toCreateTrHeader.MemberID.GetValueOrDefault(), toCreateTrHeader.EmployeeID.GetValueOrDefault(), toCreateTrHeader.TransactionDate.GetValueOrDefault(), toCreateTrHeader.DiscountPercentage.GetValueOrDefault());
+            TrHeader currentTrHeader = TrHeaderFactory.Create(Guid.NewGuid(), memberID, employeeID, transactionDate, discountPercentage);
 
             TrHeader result = TrHeaderRepository.CreateOne(currentTrHeader);
 
             return result;
         }
-        public TrHeader UpdateOneByID(Guid ID, TrHeader toUpdateTrHeader)
+        public TrHeader UpdateOneByID(Guid ID, Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
         {
-            TrHeader currentTrHeader = TrHeaderFactory.Create(Guid.NewGuid(), toUpdateTrHeader.MemberID.GetValueOrDefault(), toUpdateTrHeader.EmployeeID.GetValueOrDefault(), toUpdateTrHeader.TransactionDate.GetValueOrDefault(), toUpdateTrHeader.DiscountPercentage.GetValueOrDefault());
+            TrHeader currentTrHeader = TrHeaderFactory.Create(Guid.NewGuid(), memberID, employeeID, transactionDate, discountPercentage);
 
             TrHeader result = TrHeaderRepository.UpdateOneByID(ID, currentTrHeader);
 

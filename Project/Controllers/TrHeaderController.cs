@@ -27,20 +27,20 @@ namespace Project.Controllers
             result.Data = TrHeaderHandler.ReadOneByID(ID);
             return result;
         }
-        public Result CreateOne(TrHeader toCreateTrHeader)
+        public Result CreateOne(Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Transaction Header";
-            result.Data = TrHeaderHandler.CreateOne(toCreateTrHeader);
+            result.Data = TrHeaderHandler.CreateOne(memberID, employeeID, transactionDate, discountPercentage);
             return result;
         }
-        public Result UpdateOneByID(Guid ID, TrHeader toUpdateTrHeader)
+        public Result UpdateOneByID(Guid ID, Guid memberID, Guid employeeID, DateTime transactionDate, decimal discountPercentage)
         {
             Result result = new Result();
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to update one Transaction Header";
-            result.Data = TrHeaderHandler.UpdateOneByID(ID, toUpdateTrHeader);
+            result.Data = TrHeaderHandler.UpdateOneByID(ID, memberID, employeeID, transactionDate, discountPercentage);
             return result;
         }
         public Result DeleteOneByID(Guid ID)

@@ -27,11 +27,11 @@ namespace Project.Controllers
             result.Data = MsMemberHandler.ReadOneByID(ID);
             return result;
         }
-        public Result CreateOne(MsMember toCreateMsMember)
+        public Result CreateOne(string name, DateTime DOB, string gender, string address, string phone, string email, string password)
         {
             Result result = new Result();
 
-            Boolean isEmailValid = toCreateMsMember.MemberEmail.Contains("@") && toCreateMsMember.MemberEmail.Contains(".");
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
             if (!isEmailValid)
             {
                 result.ErrorCode = "403";
@@ -39,7 +39,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(toCreateMsMember.MemberEmail));
+            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email));
             if (isEmailRegistered)
             {
                 result.ErrorCode = "403";
@@ -47,7 +47,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isPasswordValid = (3 <= toCreateMsMember.MemberPassword.Length) && (toCreateMsMember.MemberPassword.Length <= 20);
+            Boolean isPasswordValid = (3 <= password.Length) && (password.Length <= 20);
             if (!isPasswordValid)
             {
                 result.ErrorCode = "403";
@@ -55,7 +55,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isNameValid = (3 <= toCreateMsMember.MemberName.Length) && (toCreateMsMember.MemberName.Length <= 20);
+            Boolean isNameValid = (3 <= name.Length) && (name.Length <= 20);
             if (!isNameValid)
             {
                 result.ErrorCode = "403";
@@ -63,7 +63,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDateValid = toCreateMsMember.MemberDOB.GetValueOrDefault() != null;
+            Boolean isDateValid = DOB != null;
             if (!isDateValid)
             {
                 result.ErrorCode = "403";
@@ -71,7 +71,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDateRangeValid = toCreateMsMember.MemberDOB.GetValueOrDefault().Year >= 1753;
+            Boolean isDateRangeValid = DOB.Year >= 1753;
             if (!isDateRangeValid)
             {
                 result.ErrorCode = "403";
@@ -79,7 +79,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDOBValid = Math.Abs(toCreateMsMember.MemberDOB.Value.Year - DateTime.Now.Year) >= 17;
+            Boolean isDOBValid = Math.Abs(DOB.Year - DateTime.Now.Year) >= 17;
             if (!isDOBValid)
             {
                 result.ErrorCode = "403";
@@ -87,7 +87,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isGenderValid = !String.IsNullOrEmpty(toCreateMsMember.MemberGender) && new List<String> { "other", "male", "female" }.Contains(toCreateMsMember.MemberGender);
+            Boolean isGenderValid = !String.IsNullOrEmpty(gender) && new List<String> { "other", "male", "female" }.Contains(gender);
             if (!isGenderValid)
             {
                 result.ErrorCode = "403";
@@ -98,7 +98,7 @@ namespace Project.Controllers
             Boolean isPhoneNumberValid = true;
             try
             {
-                Decimal.Parse(toCreateMsMember.MemberPhone);
+                Decimal.Parse(phone);
             }
             catch
             {
@@ -112,7 +112,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isAddressValid = toCreateMsMember.MemberAddress.ToLower().Contains("street");
+            Boolean isAddressValid = address.ToLower().Contains("street");
             if (!isAddressValid)
             {
                 result.ErrorCode = "403";
@@ -122,14 +122,14 @@ namespace Project.Controllers
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Member";
-            result.Data = MsMemberHandler.CreateOne(toCreateMsMember);
+            result.Data = MsMemberHandler.CreateOne(name, DOB, gender, address, phone, email, password);
             return result;
         }
-        public Result UpdateOneByID(Guid ID, MsMember toUpdateMsMember)
+        public Result UpdateOneByID(Guid ID, string name, DateTime DOB, string gender, string address, string phone, string email, string password)
         {
             Result result = new Result();
 
-            Boolean isEmailValid = toUpdateMsMember.MemberEmail.Contains("@") && toUpdateMsMember.MemberEmail.Contains(".");
+            Boolean isEmailValid = email.Contains("@") && email.Contains(".");
             if (!isEmailValid)
             {
                 result.ErrorCode = "403";
@@ -137,7 +137,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(toUpdateMsMember.MemberEmail));
+            Boolean isEmailRegistered = MsMemberHandler.ReadAll().Exists(x => x.MemberEmail.Equals(email));
             if (isEmailRegistered)
             {
                 result.ErrorCode = "403";
@@ -145,7 +145,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isPasswordValid = (3 <= toUpdateMsMember.MemberPassword.Length) && (toUpdateMsMember.MemberPassword.Length <= 20);
+            Boolean isPasswordValid = (3 <= password.Length) && (password.Length <= 20);
             if (!isPasswordValid)
             {
                 result.ErrorCode = "403";
@@ -153,7 +153,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isNameValid = (3 <= toUpdateMsMember.MemberName.Length) && (toUpdateMsMember.MemberName.Length <= 20);
+            Boolean isNameValid = (3 <= name.Length) && (name.Length <= 20);
             if (!isNameValid)
             {
                 result.ErrorCode = "403";
@@ -161,7 +161,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDateValid = toUpdateMsMember.MemberDOB.GetValueOrDefault() != null;
+            Boolean isDateValid = DOB != null;
             if (!isDateValid)
             {
                 result.ErrorCode = "403";
@@ -169,7 +169,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDateRangeValid = toUpdateMsMember.MemberDOB.GetValueOrDefault().Year >= 1753;
+            Boolean isDateRangeValid = DOB.Year >= 1753;
             if (!isDateRangeValid)
             {
                 result.ErrorCode = "403";
@@ -177,7 +177,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isDOBValid = Math.Abs(toUpdateMsMember.MemberDOB.Value.Year - DateTime.Now.Year) >= 17;
+            Boolean isDOBValid = Math.Abs(DOB.Year - DateTime.Now.Year) >= 17;
             if (!isDOBValid)
             {
                 result.ErrorCode = "403";
@@ -185,7 +185,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isGenderValid = !String.IsNullOrEmpty(toUpdateMsMember.MemberGender) && new List<String> { "other", "male", "female" }.Contains(toUpdateMsMember.MemberGender);
+            Boolean isGenderValid = !String.IsNullOrEmpty(gender) && new List<String> { "other", "male", "female" }.Contains(gender);
             if (!isGenderValid)
             {
                 result.ErrorCode = "403";
@@ -196,7 +196,7 @@ namespace Project.Controllers
             Boolean isPhoneNumberValid = true;
             try
             {
-                Decimal.Parse(toUpdateMsMember.MemberPhone);
+                Decimal.Parse(phone);
             }
             catch
             {
@@ -210,7 +210,7 @@ namespace Project.Controllers
                 return result;
             }
 
-            Boolean isAddressValid = toUpdateMsMember.MemberAddress.ToLower().Contains("street");
+            Boolean isAddressValid = address.ToLower().Contains("street");
             if (!isAddressValid)
             {
                 result.ErrorCode = "403";
@@ -220,7 +220,7 @@ namespace Project.Controllers
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to update one Member";
-            result.Data = MsMemberHandler.UpdateOneByID(ID, toUpdateMsMember);
+            result.Data = MsMemberHandler.UpdateOneByID(ID, name, DOB, gender, address, phone, email, password);
             return result;
         }
         public Result DeleteOneByID(Guid ID)

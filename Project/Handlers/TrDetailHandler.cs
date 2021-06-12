@@ -23,17 +23,17 @@ namespace Project.Handlers
             TrDetail result = TrDetailRepository.ReadOneByID(ID);
             return result;
         }
-        public TrDetail CreateOne(TrDetail toCreateTrDetail)
+        public TrDetail CreateOne(Guid transactionID, Guid flowerID, decimal quantity)
         {
-            TrDetail currentTrDetail = TrDetailFactory.Create(Guid.NewGuid(), toCreateTrDetail.TransactionID.GetValueOrDefault(), toCreateTrDetail.FlowerID.GetValueOrDefault(), toCreateTrDetail.Quantity.GetValueOrDefault());
+            TrDetail currentTrDetail = TrDetailFactory.Create(Guid.NewGuid(), transactionID, flowerID, quantity);
 
             TrDetail result = TrDetailRepository.CreateOne(currentTrDetail);
 
             return result;
         }
-        public TrDetail UpdateOneByID(Guid ID, TrDetail toUpdateTrDetail)
+        public TrDetail UpdateOneByID(Guid ID, Guid transactionID, Guid flowerID, decimal quantity)
         {
-            TrDetail currentTrDetail = TrDetailFactory.Create(toUpdateTrDetail.TransactionID.GetValueOrDefault(), toUpdateTrDetail.FlowerID.GetValueOrDefault(), toUpdateTrDetail.Quantity.GetValueOrDefault());
+            TrDetail currentTrDetail = TrDetailFactory.Create(transactionID, flowerID, quantity);
 
             TrDetail result = TrDetailRepository.UpdateOneByID(ID, currentTrDetail);
 

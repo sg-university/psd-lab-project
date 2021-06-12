@@ -26,29 +26,29 @@ namespace Project.Controllers
             result.Data = MsFlowerHandler.ReadOneByID(ID);
             return result;
         }
-        public Result CreateOne(MsFlower toCreateMsFlower)
+        public Result CreateOne(string name, Guid typeID, string image, string description, decimal price)
         {
             Result result = new Result();
 
-            if (String.IsNullOrEmpty(toCreateMsFlower.FlowerName) || toCreateMsFlower.FlowerName.Length < 5)
+            if (String.IsNullOrEmpty(name) || name.Length < 5)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Name must be filled and minimal length is 5 characters!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toCreateMsFlower.FlowerImage) || !toCreateMsFlower.FlowerImage.ToLower().EndsWith(".jpg"))
+            if (String.IsNullOrEmpty(image) || !image.ToLower().EndsWith(".jpg"))
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Image must be uploaded and only image with .jpg are allowed!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toCreateMsFlower.FlowerDescription) || toCreateMsFlower.FlowerDescription.Length < 50)
+            if (String.IsNullOrEmpty(description) || description.Length < 50)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Description must be filled and longer than 50 characters!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toCreateMsFlower.FlowerPrice.ToString()) || toCreateMsFlower.FlowerPrice < 20 || toCreateMsFlower.FlowerPrice > 100)
+            if (String.IsNullOrEmpty(price.ToString()) || price < 20 || price > 100)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Price must be filled and between 20 and 100 inclusively!";
@@ -57,33 +57,33 @@ namespace Project.Controllers
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to create one Flower";
-            result.Data = MsFlowerHandler.CreateOne(toCreateMsFlower);
+            result.Data = MsFlowerHandler.CreateOne(name, typeID, image, description, price);
 
             return result;
         }
-        public Result UpdateOneByID(Guid ID, MsFlower toUpdateMsFlower)
+        public Result UpdateOneByID(Guid ID, string name, Guid typeID, string image, string description, decimal price)
         {
             Result result = new Result();
 
-            if (String.IsNullOrEmpty(toUpdateMsFlower.FlowerName) || toUpdateMsFlower.FlowerName.Length < 5)
+            if (String.IsNullOrEmpty(name) || name.Length < 5)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Name must be filled and minimal length is 5 characters!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toUpdateMsFlower.FlowerImage) || !toUpdateMsFlower.FlowerImage.ToLower().EndsWith(".jpg"))
+            if (String.IsNullOrEmpty(image) || !image.ToLower().EndsWith(".jpg"))
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Image must be uploaded and only image with .jpg are allowed!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toUpdateMsFlower.FlowerDescription) || toUpdateMsFlower.FlowerDescription.Length < 50)
+            if (String.IsNullOrEmpty(description) || description.Length < 50)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Description must be filled and longer than 50 characters!";
                 return result;
             }
-            if (String.IsNullOrEmpty(toUpdateMsFlower.FlowerPrice.ToString()) || toUpdateMsFlower.FlowerPrice < 20 || toUpdateMsFlower.FlowerPrice > 100)
+            if (String.IsNullOrEmpty(price.ToString()) || price < 20 || price > 100)
             {
                 result.ErrorCode = "403";
                 result.ErrorMessage = "Price must be filled and between 20 and 100 inclusively!";
@@ -92,7 +92,7 @@ namespace Project.Controllers
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to update one Flower";
-            result.Data = MsFlowerHandler.UpdateOneByID(ID, toUpdateMsFlower);
+            result.Data = MsFlowerHandler.UpdateOneByID(ID, name, typeID, image, description, price);
             return result;
         }
         public Result DeleteOneByID(Guid ID)
