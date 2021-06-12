@@ -13,9 +13,9 @@ namespace Project.Handlers
         readonly MsMemberHandler MsMemberHandler = new MsMemberHandler();
         readonly MsMemberFactory MsMemberFactory = new MsMemberFactory();
 
-        public MsMember Register(MsMember toRegisterMsMember)
+        public MsMember Register(String name, DateTime DOB, String gender, String address, String phone, String email, String password)
         {
-            MsMember currentMsMember = MsMemberFactory.Create(toRegisterMsMember.MemberName, toRegisterMsMember.MemberDOB.GetValueOrDefault(), toRegisterMsMember.MemberGender, toRegisterMsMember.MemberAddress, toRegisterMsMember.MemberPhone, toRegisterMsMember.MemberEmail, toRegisterMsMember.MemberPassword);
+            MsMember currentMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
 
             MsMember registeredMsMember = MsMemberHandler.CreateOne(currentMsMember);
 

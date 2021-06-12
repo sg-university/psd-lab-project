@@ -43,20 +43,18 @@ namespace Project.Views
             String email = TextBoxEmail.Text.ToString();
             String password = TextBoxPassword.Text.ToString();
             String role = DropDownListRole.SelectedValue.ToString();
+            Decimal salary = 0;
 
             switch (role)
             {
                 case "member":
-                    MsMember toRegisterMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
-                    result = MsMemberAuthenticationController.Register(toRegisterMsMember);
+                    result = MsMemberAuthenticationController.Register(name, DOB, gender, address, phone, email, password);
                     break;
                 case "staff":
-                    MsEmployee toRegisterMsEmployeeStaff = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, 0, email, password);
-                    result = MsEmployeeAuthenticationController.Register(toRegisterMsEmployeeStaff);
+                    result = MsEmployeeAuthenticationController.Register(name, DOB, gender, address, phone, role, salary, email, password); ;
                     break;
                 case "admin":
-                    MsEmployee toRegisterMsEmployeeAdmin = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, 0, email, password);
-                    result = MsEmployeeAuthenticationController.Register(toRegisterMsEmployeeAdmin);
+                    result = MsEmployeeAuthenticationController.Register(name, DOB, gender, address, phone, role, salary, email, password); ;
                     break;
                 default:
                     break;
