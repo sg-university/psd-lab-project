@@ -55,7 +55,7 @@ namespace Project.Views
 
             MsMember toUpdateMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
 
-            Result result = MsMemberController.UpdateOneByID(ID, toUpdateMsMember);
+            Result result = MsMemberController.UpdateOneByID(ID, toUpdateMsMember.MemberName, toUpdateMsMember.MemberDOB.GetValueOrDefault(), toUpdateMsMember.MemberGender, toUpdateMsMember.MemberAddress, toUpdateMsMember.MemberPhone, toUpdateMsMember.MemberEmail, toUpdateMsMember.MemberPassword);
 
             if (result.SuccessCode != null)
             {

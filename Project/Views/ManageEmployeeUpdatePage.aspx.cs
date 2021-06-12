@@ -59,7 +59,7 @@ namespace Project.Views
 
             MsEmployee toUpdateMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);
 
-            Result result = MsEmployeeController.UpdateOneByID(ID, toUpdateMsEmployee);
+            Result result = MsEmployeeController.UpdateOneByID(ID, toUpdateMsEmployee.EmployeeName, toUpdateMsEmployee.EmployeeDOB.GetValueOrDefault(), toUpdateMsEmployee.EmployeeGender, toUpdateMsEmployee.EmployeeAddress, toUpdateMsEmployee.EmployeePhone, toUpdateMsEmployee.EmployeeRole, toUpdateMsEmployee.EmployeeSalary.GetValueOrDefault(), toUpdateMsEmployee.EmployeeEmail, toUpdateMsEmployee.EmployeePassword);
 
             if (result.SuccessCode != null)
             {

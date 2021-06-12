@@ -191,7 +191,7 @@ namespace Project.Controllers
 
             currentMsEmployee.EmployeePassword = password;
 
-            MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee);
+            MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee.EmployeeName, currentMsEmployee.EmployeeDOB.GetValueOrDefault(), currentMsEmployee.EmployeeGender, currentMsEmployee.EmployeeAddress, currentMsEmployee.EmployeePhone, currentMsEmployee.EmployeeRole, currentMsEmployee.EmployeeSalary.GetValueOrDefault(), currentMsEmployee.EmployeeEmail, currentMsEmployee.EmployeePassword);
 
             result.SuccessCode = "200";
             result.SucessMessage = "Succeed to reset password a Employee";

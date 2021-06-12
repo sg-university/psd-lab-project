@@ -18,11 +18,11 @@ namespace Project.Handlers
 
         public TrHeader CreateOne(TrHeader toCreateTrHeader, List<TrDetail> toCreateTrDetail)
         {
-            TrHeader currentTrHeader = TrHeaderHandler.CreateOne(toCreateTrHeader);
+            TrHeader currentTrHeader = TrHeaderHandler.CreateOne(toCreateTrHeader.MemberID.GetValueOrDefault(), toCreateTrHeader.EmployeeID.GetValueOrDefault(), toCreateTrHeader.TransactionDate.GetValueOrDefault(), toCreateTrHeader.DiscountPercentage.GetValueOrDefault());
             List<TrDetail> currentTrDetail = toCreateTrDetail.Select(x =>
             {
                 x.TransactionID = currentTrHeader.TransactionID;
-                return TrDetailHandler.CreateOne(x);
+                return TrDetailHandler.CreateOne(x.TransactionID.GetValueOrDefault(), x.FlowerID.GetValueOrDefault(), x.Quantity.GetValueOrDefault());
             }).ToList();
 
             return currentTrHeader;

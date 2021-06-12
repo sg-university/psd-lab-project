@@ -34,7 +34,7 @@ namespace Project.Views
 
             MsEmployee toCreateMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);
 
-            Result result = MsEmployeeController.CreateOne(toCreateMsEmployee);
+            Result result = MsEmployeeController.CreateOne(toCreateMsEmployee.EmployeeName, toCreateMsEmployee.EmployeeDOB.GetValueOrDefault(), toCreateMsEmployee.EmployeeGender, toCreateMsEmployee.EmployeeAddress, toCreateMsEmployee.EmployeePhone, toCreateMsEmployee.EmployeeRole, toCreateMsEmployee.EmployeeSalary.GetValueOrDefault(), toCreateMsEmployee.EmployeeEmail, toCreateMsEmployee.EmployeePassword);
 
             if (result.SuccessCode != null)
             {

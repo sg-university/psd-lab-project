@@ -17,7 +17,7 @@ namespace Project.Handlers
         {
             MsMember currentMsMember = MsMemberFactory.Create(name, DOB, gender, address, phone, email, password);
 
-            MsMember registeredMsMember = MsMemberHandler.CreateOne(currentMsMember);
+            MsMember registeredMsMember = MsMemberHandler.CreateOne(currentMsMember.MemberName, currentMsMember.MemberDOB.GetValueOrDefault(), currentMsMember.MemberGender, currentMsMember.MemberAddress, currentMsMember.MemberPhone, currentMsMember.MemberEmail, currentMsMember.MemberPassword);
 
             return registeredMsMember;
         }
@@ -35,7 +35,7 @@ namespace Project.Handlers
 
             currentMsMember.MemberPassword = password;
 
-            MsMember updatedMsMember = MsMemberHandler.UpdateOneByID(currentMsMember.MemberID, currentMsMember);
+            MsMember updatedMsMember = MsMemberHandler.UpdateOneByID(currentMsMember.MemberID, currentMsMember.MemberName, currentMsMember.MemberDOB.GetValueOrDefault(), currentMsMember.MemberGender, currentMsMember.MemberAddress, currentMsMember.MemberPhone, currentMsMember.MemberEmail, currentMsMember.MemberPassword);
 
             return updatedMsMember;
         }

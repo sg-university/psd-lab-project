@@ -17,7 +17,7 @@ namespace Project.Handlers
         {
             MsEmployee currentMsEmployee = MsEmployeeFactory.Create(name, DOB, gender, address, phone, role, salary, email, password);
 
-            MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(currentMsEmployee);
+            MsEmployee registeredMsEmployee = MsEmployeeHandler.CreateOne(name, DOB, gender, address, phone, role, salary, email, password);
 
             return registeredMsEmployee;
         }
@@ -35,7 +35,7 @@ namespace Project.Handlers
 
             currentMsEmployee.EmployeePassword = password;
 
-            MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee);
+            MsEmployee updatedMsEmployee = MsEmployeeHandler.UpdateOneByID(currentMsEmployee.EmployeeID, currentMsEmployee.EmployeeName, currentMsEmployee.EmployeeDOB.GetValueOrDefault(), currentMsEmployee.EmployeeGender, currentMsEmployee.EmployeeAddress, currentMsEmployee.EmployeePhone, currentMsEmployee.EmployeeRole, currentMsEmployee.EmployeeSalary.GetValueOrDefault(), currentMsEmployee.EmployeeEmail, currentMsEmployee.EmployeePassword);
 
             return updatedMsEmployee;
         }
